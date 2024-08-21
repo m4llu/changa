@@ -1,0 +1,179 @@
+@import '../../scss/variables'; // Adjust path if necessary
+
+// Base styles for the sticky navigation
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  background-color: $white-color;
+  padding: 1.5rem 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  transition: $transition;
+
+  // Logo container styles
+  .logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 80%);
+    transition: $transition;
+
+    .logo {
+      height: 6rem;
+      transition: $transition;
+    }
+
+    .logo-phrase {
+      display: block;
+    }
+  }
+
+  // Default styles for the navigation list
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    transition: $transition;
+
+    // List item styles
+    li {
+      margin: 0 1rem;
+      padding-inline: 4vw;
+      transition: $transition;
+
+      a {
+        text-decoration: none;
+        color: $text-color;
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        &.selected-page {
+          background: linear-gradient($secondary-color, $tertiary-color);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  // Hamburger menu styles
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0 1rem;
+    transition: $transition;
+
+    div {
+      width: 25px;
+      height: 3px;
+      background-color: $text-color;
+      margin: 4px 0;
+      transition: $transition;
+    }
+  }
+
+  // Styles applied when scrolled
+  &.shrink {
+    padding: 1rem 0;
+
+    // Hide the horizontal nav when .shrink is applied
+    ul {
+      display: none; // Hide horizontal nav
+    }
+
+    // Show hamburger menu when .shrink is applied
+    .hamburger {
+      display: flex;
+    }
+
+    // Show the vertical navigation list when hamburger menu is open
+    ul.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: $white-color;
+      width: 100%;
+      text-align: center;
+      z-index: 999; // Ensure it overlaps other content
+    }
+
+    // Adjust logo container and logo size when .shrink is applied
+    .logo-container {
+      top: 0;
+      left: 0;
+      transform: translate(0, 0);
+      height: 100%;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        height: 2rem;
+      }
+
+      .logo-phrase {
+        display: none;
+      }
+    }
+  }
+}
+
+// Media query for screens less than 728px
+@media only screen and (max-width: 728px) {
+  .sticky-nav {
+    .hamburger {
+      display: flex;
+    }
+
+    ul {
+      display: none; // Hide horizontal nav by default
+    }
+
+    // Show the vertical navigation list when hamburger menu is open
+    &.shrink ul.open {
+      display: flex;
+    }
+
+    .logo-container {
+      .logo {
+        height: 4rem;
+      }
+    }
+
+    ul li {
+      margin: 0 1rem;
+      padding-inline: 2vw;
+    }
+  }
+}
+
+// Media query for screens less than 450px
+@media only screen and (max-width: 450px) {
+  .sticky-nav {
+    ul li {
+      margin: 0 0.5rem;
+      padding-inline: 1.5vw;
+    }
+
+    ul li a {
+      font-size: 1rem;
+    }
+
+    .logo {
+      height: 3rem;
+    }
+  }
+}
