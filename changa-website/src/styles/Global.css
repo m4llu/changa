@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #180161;
+    --secondary-color: #fb773c;
+    --tertiary-color: #c22e7d;
+    --background-gradient: linear-gradient(90deg, rgba(190, 71, 142, 1) 0%, rgba(87, 165, 237, 1) 100%);
+    --white-color: #fff;
+    --gray-color: #e7e7e7;
+    --light-gray-color: #888;
+    --transition: all 0.3s ease;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Reem Kufi', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h2 {
+    color: rgb(97, 86, 86);
+  }
+  
+  h3 {
+    font-weight: 700;
+    margin: 0.5rem 0 0;
+    background: linear-gradient(var(--secondary-color), var(--tertiary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  h4 {
+    margin: 0;
+  }
+  
+  section {
+    padding: 50px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
