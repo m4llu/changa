@@ -18,15 +18,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, 80%);
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
 
     .logo {
       height: 6rem;
-      transition: height 0.4s ease;
+      transition: height 0.3s ease;
     }
 
     .logo-phrase {
       display: block;
+      transition: all 0;
     }
   }
 
@@ -43,7 +44,7 @@
     li {
       margin: 0 1rem;
       padding-inline: 4vw;
-      transition: all 0.4s ease-out;
+      transition: all 0.3s ease-out;
       padding-block: 0.5rem;
 
       a {
@@ -60,6 +61,7 @@
 
         &:hover {
           text-decoration: underline;
+          cursor: pointer;
         }
       }
     }
@@ -182,10 +184,14 @@
       font-size: 1rem;
     }
   }
-
-  .logo-container {
-    .logo {
-      height: 2rem;
+  .sticky-nav {
+    .logo-container {
+      .logo {
+        height: 3rem;
+      }
+      .logo-phrase{
+        font-size: 1rem;
+      }
     }
   }
 }

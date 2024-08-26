@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.scss';
 import logo from '../../assets/CHANGA.svg';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onNavClick: (page: string) => void;
+  currentPage: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onNavClick, currentPage }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(prevState => !prevState);
   };
 
-  // useEffect to handle window resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 728) {
@@ -17,13 +21,9 @@ const Navbar: React.FC = () => {
       }
     };
 
-    // attach the event listener
     window.addEventListener('resize', handleResize);
+    handleResize(); // Call initially to set correct state
 
-    // call the resize handler initially to set the correct state
-    handleResize();
-
-    // cleanup the event listener on component unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -37,10 +37,38 @@ const Navbar: React.FC = () => {
         <div></div>
       </div>
       <ul className={menuOpen ? 'open' : ''}>
-        <li><a href="#home" className="selected-page">Home</a></li>
-        <li><a href="#about">Discover</a></li>
-        <li><a href="#services">About</a></li>
-        <li><a href="#contact">Sign In</a></li>
+        <li>
+          <a 
+            onClick={() => onNavClick('home')} 
+            className={currentPage === 'home' ? 'selected-page' : ''}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a 
+            onClick={() => onNavClick('discover')} 
+            className={currentPage === 'discover' ? 'selected-page' : ''}
+          >
+            Discover
+          </a>
+        </li>
+        <li>
+          <a 
+            onClick={() => onNavClick('about')} 
+            className={currentPage === 'about' ? 'selected-page' : ''}
+          >
+            About
+          </a>
+        </li>
+        <li>
+          <a 
+            onClick={() => onNavClick('login')} 
+            className={currentPage === 'login' ? 'selected-page' : ''}
+          >
+            Sign In
+          </a>
+        </li>
       </ul>
       <div className="logo-container">
         <img src={logo} alt="Logo" className="logo" id="logo" />

@@ -6,11 +6,11 @@
   width: 100vw;
   margin-top: 20rem;
   transition: margin-top 0.4s ease;
-  background: var(--background-gradient);
+  background: $background-gradient;
   overflow: hidden;
 
   &.low {
-    margin-top: 5rem;
+    margin-top: 0rem;
   }
 
   .banner-image {
@@ -40,12 +40,11 @@
     flex-direction: column;
     position: relative;
     left: -6vw;
-    text-shadow: 0.5vw 0.5vw 2vw #00000079;
-    transition: $transition;
+    text-shadow: 0.5vw 0.5vw 2vw #00000037;
+    transition: text-shadow 0.4s ease-out;
 
     &:hover {
-      transform: scale(1.02);
-      text-shadow: 0vw 0vw 2vw #ffb8e779;
+      text-shadow: 0vw 0vw 2vw #ffb8e74a;
     }
 
     .paragraph {
@@ -66,7 +65,7 @@
     &-start {
       padding-top: 1.5vw;
       font-size: 3vw; // Responsive font size
-      color: var(--primary-color);
+      color: $primary-color;
       min-width: 10vw;
       max-width: 10vw;
       display: flex;
@@ -75,7 +74,7 @@
     }
 
     &-end {
-      color: var(--white-color);
+      color: $white-color;
       flex: 0.8;
       display: flex;
       justify-content: start;
@@ -95,11 +94,11 @@
       display: flex;
       justify-content: end;
       align-items: start;
-      color: var(--primary-color);
+      color: $primary-color;
     }
 
     &-end {
-      color: var(--primary-color);
+      color: $primary-color;
       flex: 0.8;
       display: flex;
       justify-content: start;
@@ -124,5 +123,17 @@
       display: flex;
       justify-content: start;
     }
+  }
+}
+
+@media only screen and (max-width: 728px) {
+  .banner {
+    margin-top: 14rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .banner {
+    margin-top: 10rem;
   }
 }
