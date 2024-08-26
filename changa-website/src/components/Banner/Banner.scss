@@ -4,13 +4,13 @@
   font-family: 'Readex Pro', sans-serif;
   aspect-ratio: 4 / 2;
   width: 100vw;
-  margin-top: 28rem;
+  margin-top: 20rem;
   transition: margin-top 0.4s ease;
   background: var(--background-gradient);
   overflow: hidden;
 
   &.low {
-    margin-top: 6.5rem;
+    margin-top: 5rem;
   }
 
   .banner-image {
@@ -18,7 +18,7 @@
     height: 80%;
     right: 30vw;
     z-index: 399;
-    opacity: 0.6;
+    opacity: 1;
     align-self: flex-end;
   }
 
@@ -33,13 +33,20 @@
     user-select: none;
     white-space: nowrap;
     font-family: 'Readex Pro', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 8vw;
     padding-inline: 5vw;
     display: flex;
     flex-direction: column;
     position: relative;
     left: -6vw;
+    text-shadow: 0.5vw 0.5vw 2vw #00000079;
+    transition: $transition;
+
+    &:hover {
+      transform: scale(1.02);
+      text-shadow: 0vw 0vw 2vw #ffb8e779;
+    }
 
     .paragraph {
       font-size: 1.5vw;

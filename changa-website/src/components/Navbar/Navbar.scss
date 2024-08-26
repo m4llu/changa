@@ -18,11 +18,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, 80%);
-    transition: $transition;
+    transition: all 0.4s ease;
 
     .logo {
       height: 6rem;
-      transition: $transition;
+      transition: height 0.4s ease;
     }
 
     .logo-phrase {
@@ -38,13 +38,13 @@
     margin: 0;
     padding: 0;
     flex: 1;
-    transition: $transition;
 
     // List item styles
     li {
       margin: 0 1rem;
       padding-inline: 4vw;
-      transition: $transition;
+      transition: all 0.4s ease-out;
+      padding-block: 0.5rem;
 
       a {
         text-decoration: none;
@@ -67,7 +67,7 @@
 
   // Hamburger menu styles
   .hamburger {
-    display: none;
+    display: none; // Hidden by default
     flex-direction: column;
     cursor: pointer;
     padding: 0 1rem;
@@ -82,18 +82,28 @@
     }
   }
 
-  // Styles applied when scrolled
+  // Styles applied when scrolled and shrink class is added
   &.shrink {
     padding: 1rem 0;
-
-    // Hide the horizontal nav when .shrink is applied
+    
     ul {
-      display: none; // Hide horizontal nav
+      justify-content: end;
     }
 
-    // Show hamburger menu when .shrink is applied
-    .hamburger {
-      display: flex;
+    li {
+      padding: 0.5rem 1vw;
+    }
+
+    @media only screen and (max-width: 728px) {
+      // Hide the horizontal nav when .shrink is applied and screen is less than 728px
+      ul {
+        display: none; // Hide horizontal nav
+      }
+
+      // Show hamburger menu when .shrink is applied and screen is less than 728px
+      .hamburger {
+        display: flex;
+      }
     }
 
     // Show the vertical navigation list when hamburger menu is open
@@ -104,9 +114,13 @@
       top: 100%;
       right: 0;
       background-color: $white-color;
-      width: 100%;
+      width: 40%;
       text-align: center;
       z-index: 999; // Ensure it overlaps other content
+
+      li {
+        padding-block: 1rem;
+      }
     }
 
     // Adjust logo container and logo size when .shrink is applied
@@ -134,16 +148,12 @@
 // Media query for screens less than 728px
 @media only screen and (max-width: 728px) {
   .sticky-nav {
-    .hamburger {
-      display: flex;
-    }
-
     ul {
-      display: none; // Hide horizontal nav by default
+      display: flex; // Hide horizontal nav by default on small screens
     }
 
     // Show the vertical navigation list when hamburger menu is open
-    &.shrink ul.open {
+    ul.open {
       display: flex;
     }
 
@@ -171,9 +181,11 @@
     ul li a {
       font-size: 1rem;
     }
+  }
 
+  .logo-container {
     .logo {
-      height: 3rem;
+      height: 2rem;
     }
   }
 }
