@@ -23,7 +23,14 @@ const AlbumList: React.FC = () => {
       setError(null);
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/Products`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/Products`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-KEY': `${import.meta.env.VITE_API_KEY}`,
+          },
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch albums');
         }
@@ -68,7 +75,7 @@ const AlbumList: React.FC = () => {
 
   return (
     <>
-    <div className="search-bar">
+      <div className="search-bar">
         <input
           type="text"
           placeholder="Search albums..."
@@ -76,18 +83,17 @@ const AlbumList: React.FC = () => {
           onChange={handleSearchChange}
         />
       </div>
-    <section className="album-list" aria-label="Album List">
-      
-      {filteredAlbums.length ? (
-        filteredAlbums.map((album) => (
-          <article key={album.title} className="album-item">
-            <AlbumCard {...album} />
-          </article>
-        ))
-      ) : (
-        <p>No albums found</p>
-      )}
-    </section>
+      <section className="album-list" aria-label="Album List">
+        {filteredAlbums.length ? (
+          filteredAlbums.map((album) => (
+            <article key={album.title} className="album-item">
+              <AlbumCard {...album} />
+            </article>
+          ))
+        ) : (
+          <p>No albums found</p>
+        )}
+      </section>
     </>
   );
 };
