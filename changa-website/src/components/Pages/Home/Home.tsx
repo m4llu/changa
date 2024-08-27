@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from '../../Banner/Banner';
 import Sections from '../../Sections/Sections';
+import ProductForm from '../../ProductForm';
 
 const Home: React.FC = () => {
     const banner = document.querySelector('.banner');
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
     <div className="home-page">
       <Banner />
       <Sections />
+      <ProductForm />
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.album-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.category-list {
+    width: 20%;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.album-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.album-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.page-selector {
+    font-size: 14px;
+    color: #666;
+}

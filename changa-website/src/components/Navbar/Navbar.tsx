@@ -50,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, currentPage }) => {
             onClick={() => onNavClick('discover')} 
             className={currentPage === 'discover' ? 'selected-page' : ''}
           >
-            Discover
+            Find
           </a>
         </li>
         <li>

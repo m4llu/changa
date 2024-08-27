@@ -2,6 +2,7 @@
 import React from 'react';
 import CategoryList from './CategoryList/CategoryList';
 import AlbumList from './AlbumList/AlbumList';
+import './AlbumPage.scss';
 
 const AlbumPage: React.FC = () => {
   return (

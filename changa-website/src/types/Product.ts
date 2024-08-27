@@ -6,16 +6,16 @@ export enum DiscType {
   }
   
   export enum Category {
-    Rock = 'Rock',
-    Pop = 'Pop',
-    Jazz = 'Jazz',
-    Classical = 'Classical',
-    HipHop = 'HipHop',
+    'Rock',
+    'Pop',
+    'Jazz',
+    'Classical',
+    'HipHop',
   }
   
   export interface Product {
-    id: number;                 
-    created: Date;            
+    id: number | undefined;                 
+    created: Date | undefined;            
     album: string;             
     artist: string;           
     price: string;              
