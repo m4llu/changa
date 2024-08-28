@@ -1,9 +1,9 @@
-// src/components/Pages/Albums/AlbumList.tsx
 import React, { useState, useEffect } from 'react';
 import AlbumCard from './AlbumCard/AlbumCard';
 import './AlbumList.scss';
 
 interface Album {
+  id: number;
   title: string;
   artist: string;
   price: number;
@@ -23,7 +23,7 @@ const AlbumList: React.FC = () => {
       setError(null);
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/Products`, {
+        const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -34,15 +34,16 @@ const AlbumList: React.FC = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch albums');
         }
-        
+
         const data = await response.json();
 
-        // Assuming the API returns a list of albums, adjust as necessary
+        // Assuming the API returns a list of albums with an 'id' field
         const fetchedAlbums: Album[] = data.map((item: any) => ({
+          id: item.id, // Include the id
           title: item.album,
           artist: item.artist,
           price: parseFloat(item.price),
-          imageUrl: item.imageUrl || 'default/path/to/image.jpg', // Adjust if the image URL is included
+          imageUrl: item.cover || 'default/path/to/image.jpg',
         }));
 
         setAlbums(fetchedAlbums);
@@ -86,8 +87,9 @@ const AlbumList: React.FC = () => {
       <section className="album-list" aria-label="Album List">
         {filteredAlbums.length ? (
           filteredAlbums.map((album) => (
-            <article key={album.title} className="album-item">
+            <article key={album.id} className="album-item"> {/* Use id as the key */}
               <AlbumCard {...album} />
+              <div className='gap'></div>
             </article>
           ))
         ) : (

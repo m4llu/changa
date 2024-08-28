@@ -17,13 +17,14 @@ export enum DiscType {
     id: number | undefined;                 
     created: Date | undefined;            
     album: string;             
-    artist: string;           
-    price: string;              
+    artist: string;       
+    price: number;              
     quantity: number;          
     discType: DiscType;      
     category: Category;        
     recordLabel: string;     
     releaseYear: number;       
-    description: string;          
+    description: string;    
+    cover: string;          
   }
   

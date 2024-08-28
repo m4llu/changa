@@ -1,6 +1,7 @@
 .album-page {
     display: flex;
     flex-direction: row;
+    height: 90vh;
 }
 
 .category-list {
@@ -10,8 +11,11 @@
 }
 
 .album-section {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-    padding: 20px;
+    padding: 1rem;
+    height: auto;
 }
 
 .album-header {

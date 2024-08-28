@@ -2,14 +2,21 @@
 
 
 .album-list {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    max-height: 62vh;
-    gap: 1px;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    gap: 1px #000000;
     margin: 0;
     padding: 0;
+
+    .gap {
+        background-color: #dadada;
+        height: 0.1rem;
+        width: 100%;
+    }
 
     article {
         .album-card {
@@ -17,15 +24,21 @@
             display: flex;
             padding: 1rem;
 
-            figure {
-                width: 10%;
+            .album-image-wrapper {
+                height: 100%;
                 aspect-ratio: 1/1;
+            }
+
+            h2 {
+                text-align: left;
             }
 
             .album-details {
                 display: flex;
                 flex: 1;
                 flex-direction: column;
+                justify-content: space-between;
+                padding-block: 1rem;
             }
 
             .buy-button {

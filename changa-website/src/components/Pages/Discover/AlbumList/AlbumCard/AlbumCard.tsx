@@ -14,15 +14,13 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ title, artist, price, imageUrl })
     <div className="album-card">
       <figure className="album-image-wrapper">
         <img src={imageUrl} alt={`${title} cover`} className="album-image" />
-        <figcaption className="sr-only">{title} by {artist}</figcaption>
       </figure>
       <div className="album-details">
         <div>
           <h2 className="album-title">{title}</h2>
           <p className="album-artist">{artist}</p>
-          <p className="album-price">${price.toFixed(2)}</p>
         </div>
-        <BuyButton onClick={console.log}/>
+        <BuyButton onClick={console.log} price={price.toFixed(2)}/>
       </div>
     </div>
   );

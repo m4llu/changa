@@ -12,7 +12,9 @@ const AlbumPage: React.FC = () => {
       </aside>
       <section className="album-section">
         <header className="album-header">
-          <h1 className="page-title">Albums</h1>
+          <div>
+            <h1 className="page-title">Albums</h1>
+          </div>
           <nav aria-label="Pagination" className="page-selector">
             {/* Page Selector Placeholder (implement pagination if needed) */}
             Page 1 of 10

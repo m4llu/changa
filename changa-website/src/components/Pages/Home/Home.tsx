@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from '../../Banner/Banner';
 import Sections from '../../Sections/Sections';
-import ProductForm from '../../ProductForm';
+import ProductForm from '../../ProductForm/ProductForm';
 
 const Home: React.FC = () => {
     const banner = document.querySelector('.banner');
