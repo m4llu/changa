@@ -18,13 +18,21 @@ export enum DiscType {
     created: Date | undefined;            
     album: string;             
     artist: string;       
-    price: number;              
+    price: number;             
     quantity: number;          
     discType: DiscType;      
     category: Category;        
     recordLabel: string;     
     releaseYear: number;       
     description: string;    
-    cover: string;          
+    cover: string;      
+    ean: string;   
+    receiptProducts?: ReceiptProductDTO[];
   }
-  
+
+  export interface ReceiptProductDTO {
+    id: number | undefined;
+    productId: number;
+    receiptId: number;
+  }
+   
