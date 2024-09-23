@@ -7,7 +7,6 @@ const Login: React.FC = () => {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle the login logic here, e.g., API call
     console.log('Logging in with', { email, password });
   };
 
