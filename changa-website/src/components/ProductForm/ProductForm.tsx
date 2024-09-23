@@ -18,6 +18,8 @@ const ProductForm: React.FC = () => {
     releaseYear: 2024,
     description: 'No description available yet.',
     cover: '',
+    ean: '',
+    receiptProducts: [],
   });
 
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -132,6 +134,8 @@ const ProductForm: React.FC = () => {
         releaseYear: 2024,
         description: 'No description available yet.',
         cover: '',
+        ean: '',
+        receiptProducts: [],
       });
 
       // Update the existing albums list to reflect the newly added album
@@ -189,6 +193,7 @@ const ProductForm: React.FC = () => {
         releaseYear: 2024,
         description: 'No description available yet.',
         cover: '',
+        ean: ''
       });
 
     } catch (error) {
