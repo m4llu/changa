@@ -1,0 +1,109 @@
+@import '../../scss/variables'; // Adjust path if necessary
+.changa {
+    background: linear-gradient(100deg, var(--gradientEnd), var(--gradientStart));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #222222; // Dark background
+    color: #ecf0f1; // Light text color
+    padding: 40px 20px; // Padding for the footer
+
+    .footer-content {
+        display: flex; // Flexbox for layout
+        justify-content: space-between; // Space between sections
+        flex-wrap: wrap; // Wrap sections on smaller screens
+
+        .footer-section {
+            flex: 1; // Each section takes equal space
+            margin: 0 20px; // Margins between sections
+
+            &.about {
+                max-width: 300px; // Limit width for about section
+            }
+
+            h2.footer-title {
+                margin-bottom: 20px; // Space below titles
+                font-size: 1.5em; // Increase title size
+                text-transform: uppercase; // Uppercase titles
+                letter-spacing: 1px; // Space between letters
+                border-bottom: 2px solid #ecf0f1; // Underline effect
+                padding-bottom: 10px; // Space below the line
+                background: linear-gradient(30deg, var(--gradientStart), var(--gradientEnd));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            p {
+                line-height: 1.6; // Improve readability
+                font-weight: 200;
+            }
+
+            ul {
+                list-style: none; // Remove bullet points
+                padding: 0; // Remove padding
+
+                li {
+                    margin: 10px 0; // Space between list items
+
+                    a {
+                        color: #ecf0f1; // Link color
+                        text-decoration: none; // Remove underline
+                        transition: color 0.3s ease; // Smooth color transition
+
+                        &:hover {
+                            background: linear-gradient(100deg, var(--gradientEnd), var(--gradientStart));
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        .social {
+            display: flex; // Flexbox for social icons
+            flex-direction: column;
+            align-items: center; // Center icons vertically
+
+            .social-icons {
+                display: flex;
+
+                a {
+                    color: #ecf0f1; // Icon color
+                    font-size: 1.5em; // Size of the icons
+                    margin-right: 15px; // Space between icons
+                    transition: color 0.3s ease; // Smooth color transition
+
+                    &:hover {
+                        color: #3498db; // Change color on hover
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-bottom {
+        text-align: center; // Center text
+        margin-top: 20px; // Space above
+
+        p {
+            font-size: 0.9em; // Smaller font size
+            color: #bdc3c7; // Lighter text color
+        }
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column; // Stack sections on smaller screens
+            align-items: center; // Center align sections
+        }
+
+        .footer-section {
+            margin: 20px 0; // Vertical margin for stacked sections
+            text-align: center; // Center text in sections
+        }
+    }
+}

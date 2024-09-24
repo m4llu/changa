@@ -1,12 +1,25 @@
+@property --gradientStart {
+    syntax: '<color>';
+    initial-value: rgba(251,119,60,1);
+    inherits: false;
+  }
+  
+  @property --gradientEnd {
+    syntax: '<color>';
+    initial-value: rgba(194,46,125,1);
+    inherits: false;
+  }
+
 .button {
-    padding: 0.8em 1.5em;
+    padding: 1em 2em;
     border: 0.2vh solid #00000000;
-    border-radius: 0.3vh;
+    border-radius: 0.4vh;
     font-size: 1rem;
     font-weight: 300;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease; /* Transition for background */
     box-sizing: border-box;
+    box-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.201);
 
     &.primary {
         background-color: #ffffff;
@@ -21,29 +34,25 @@
 
     &.secondary {
         background-color: #000000;
-        border-color: #ffffff;
+        border-color: #c8c8c8;
         color: #ffffff;
 
         &:hover {
-            background-color: #fff;
-            border-color: #000000;
+            background-color: #ffffff;
+            border-color: #c8c8c8;
             color: #000000;
         }
     }
 
     &.tertiary {
-        background: rgb(251,119,60);
-        background: linear-gradient(124deg, rgba(251,119,60,1) 0%, rgba(194,46,125,1) 100%);
+        background: linear-gradient(90deg, var(--gradientStart), var(--gradientEnd));
         color: #fff;
+        transition: --gradientStart 0.3s, --gradientEnd 0.3s;
+        border-color: #fff;
 
         &:hover {
-            background-color: #218838;
+            --gradientStart: #dd4c4c;
+            --gradientEnd: #912aab;
         }
     }
-
-        &:hover {
-            background-color: #0056b3;
-        }
-    }
-
-   
+}

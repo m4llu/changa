@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './scss/main.scss';
-
 import Navbar from './components/Navbar/Navbar';
 import useStickyNav from './hooks/useStickyNav';
 import Home from './components/Pages/Home/Home';
 import Login from './components/Pages/Login/Login';
 import Discover from './components/Pages/Discover/AlbumPage';
+import AnnouncementBar from './components/Navbar/AnnouncementBar';
+import Footer from './components/Footer/Footer';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -59,10 +60,12 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <AnnouncementBar />
       <Navbar onNavClick={setCurrentPage} currentPage={currentPage} /> {/* Pass currentPage prop */}
       <main>
         {renderPage()}
       </main>
+      <Footer />
     </div>
   );
 };

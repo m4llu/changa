@@ -1,0 +1,35 @@
+@import '../../scss/variables';
+
+.announcement-bar {
+  background: linear-gradient(120deg, $secondary-color, $tertiary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: min-content;
+  z-index: 9999;
+  overflow: hidden; /* Hide the overflow to make the text reappear from the right side */
+
+  .scrolling-text-wrapper {
+    display: flex; /* Use flexbox for alignment */
+    white-space: nowrap; /* Prevent text from wrapping onto the next line */
+    animation: scroll-left 20s linear infinite; /* Smooth infinite scrolling */
+  }
+
+  .scrolling-text-wrapper span {
+    display: inline-block; /* Make each part an inline block */
+    color: $white-color;
+    font-size: 1.2rem;
+    margin: 0.2rem 0; /* Adjust vertical margins as needed */
+    padding: 0 10rem; /* Add horizontal gaps between segments, adjust as needed */
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0); /* Text starts at its normal position */
+  }
+  100% {
+    transform: translateX(-100%); /* Moves text off the screen completely */
+  }
+}
