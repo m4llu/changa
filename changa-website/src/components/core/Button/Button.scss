@@ -12,7 +12,7 @@
 
 .button {
     padding: 1em 2em;
-    border: 0.2vh solid #00000000;
+    border: 0.1em solid #00000000;
     border-radius: 0.4vh;
     font-size: 1rem;
     font-weight: 300;
@@ -34,7 +34,7 @@
 
     &.secondary {
         background-color: #000000;
-        border-color: #c8c8c8;
+        border-color: #000000;
         color: #ffffff;
 
         &:hover {
@@ -48,7 +48,8 @@
         background: linear-gradient(90deg, var(--gradientStart), var(--gradientEnd));
         color: #fff;
         transition: --gradientStart 0.3s, --gradientEnd 0.3s;
-        border-color: #fff;
+        border: 0; /* No border for gradient buttons */
+        padding: 1.1em 2.1em; /* Adjust padding slightly for visual consistency */
 
         &:hover {
             --gradientStart: #dd4c4c;
