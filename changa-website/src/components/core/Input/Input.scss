@@ -1,0 +1,85 @@
+@import '../../../scss/variables';
+
+.input-container {
+    display: flex;
+    align-items: center;
+    border: 0.1em solid #000000;
+    border-radius: 0.4rem;
+    padding: 0.2rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    font-family: 'Reem Kufi', sans-serif;
+    background-color: #ffffff;
+
+    &.default {
+        border-color: #000000;
+
+        &:focus-within {
+            border-color: #db3477;
+        }
+    }
+
+    &.search {
+        border-color: #2d2d2d;
+        position: relative;
+
+        &:focus-within {
+            border-color: #000000;
+        }
+    }
+
+    &.small {
+        max-width: 200px;
+    }
+
+    &.large {
+        max-width: 600px;
+    }
+
+    &.full-width {
+        max-width: 100%;
+    }
+
+    &.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+        border-color: #ccc;
+    }
+
+    .input-field {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        padding: 0.5rem;
+        border-radius: inherit;
+        box-sizing: border-box;
+        width: 100%;
+        transition: box-shadow 0.3s ease;
+
+        &::placeholder {
+            color: #bdc3c7;
+        }
+    }
+
+    .search-button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: #888;
+        margin-left: 0.5rem;
+        padding: 0;
+        display: flex;
+
+        &:hover {
+            color: var(--gradientStart);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            color: #ccc;
+        }
+    }
+}

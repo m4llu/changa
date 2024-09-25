@@ -4,6 +4,7 @@ import { FaCcVisa, FaCcMastercard, FaBitcoin, FaGooglePay } from 'react-icons/fa
 import { SiMonero } from 'react-icons/si'; // Monero icon from react-icons
 import './Footer.scss';
 import Button from '../core/Button/Button';
+import Input from '../core/Input/Input';
 
 const Footer: React.FC = () => {
     return (
@@ -57,7 +58,7 @@ const Footer: React.FC = () => {
                         <h2 className="footer-title">Newsletter</h2>
                         <p>Subscribe to our newsletter to stay updated on the latest vinyl releases and offers.</p>
                         <form className="newsletter-form">
-                            <input type="email" placeholder="Enter your email" />
+                            <Input type="email" placeholder="Enter your email" inputSize='small'/>
                             <Button variant="tertiary" onClick={() => console.log('Button clicked')}>
                                 SUBSCRIBE
                             </Button>

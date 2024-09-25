@@ -129,7 +129,7 @@
             .newsletter {
                 form.newsletter-form {
                     display: flex;
-                    height: 35px;
+                    height: min-content;
                     flex-direction: row;
                     align-items: flex-start;
                     gap: 10px;
@@ -140,11 +140,6 @@
                         font-size: 1em;
                         width: 100%;
                         max-width: 300px;
-                    }
-                    button {
-                        padding: 0 1em 0 1em;
-                        height: 100%;
-                        margin: 0;
                     }
                 }
             }
