@@ -28,6 +28,7 @@ export enum DiscType {
     cover: string;      
     ean: string;   
     receiptProducts?: ReceiptProductDTO[];
+    couponProducts?: [];
   }
 
   export interface ReceiptProductDTO {

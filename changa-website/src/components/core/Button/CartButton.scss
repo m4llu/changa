@@ -1,0 +1,73 @@
+// CartButton.scss
+
+.button {
+    // Common button size
+    width: 170px; // Set a consistent width
+    height: 45px; // Set a consistent height
+    overflow: hidden; // Ensure content does not overflow
+    white-space: nowrap; // Prevent text from wrapping
+    text-overflow: ellipsis; // Add ellipsis for overflow text
+
+    // Add some margin to the button
+    margin: 0.5em 0; 
+
+    // Specific styles for ShoppingCartButton
+    display: flex; // Make it flex to center align icon and text
+    align-items: center; // Vertically center align icon and text
+    justify-content: space-between; // Space between icon and text
+
+    // Modifier styles
+    &.primary {
+        background-color: #ffffff;
+        border-color: #000000;
+        color: #000000;
+        
+        &:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+    }
+
+    &.secondary {
+        background-color: #000000;
+        border-color: #000000;
+        color: #ffffff;
+
+        &:hover {
+            background-color: #ffffff;
+            border-color: #c8c8c8;
+            color: #000000;
+        }
+    }
+
+    &.tertiary {
+        background: linear-gradient(90deg, var(--gradientStart), var(--gradientEnd));
+        color: #fff;
+        border: 0; // No border for gradient button
+        
+        &:hover {
+            --gradientStart: #dd4c4c;
+            --gradientEnd: #912aab;
+        }
+    }
+
+    // Size modifiers
+    &.small {
+        padding: 0.5em 1em; // Adjust padding for small button
+        font-size: 0.875rem;
+    }
+
+    &.large {
+        padding: 1.5em 3em; // Adjust padding for large button
+        font-size: 1.25rem;
+    }
+
+    // Disabled state
+    &.disabled, &:disabled {
+        background-color: #f1f1f1;
+        color: #aaa;
+        cursor: not-allowed;
+        border-color: #ddd;
+        pointer-events: none;
+    }
+}

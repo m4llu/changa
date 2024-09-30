@@ -68,7 +68,7 @@
     &__bottom-container {
         display: flex;
         justify-content: space-between;
-        align-items: center; // Center vertically
+        align-items: end; // Center vertically
 
         &__button {
             padding: 12px 0; // Padding for better touch target

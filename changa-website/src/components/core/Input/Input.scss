@@ -3,7 +3,7 @@
 .input-container {
     display: flex;
     align-items: center;
-    border: 0.1em solid #000000;
+    border: 0.05em solid #000000;
     border-radius: 0.4rem;
     padding: 0.2rem;
     transition: border-color 0.3s ease;
@@ -52,7 +52,7 @@
         border: none;
         outline: none;
         font-size: 1rem;
-        padding: 0.5rem;
+        padding: 0.3rem;
         border-radius: inherit;
         box-sizing: border-box;
         width: 100%;

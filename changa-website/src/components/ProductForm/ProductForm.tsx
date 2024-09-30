@@ -14,12 +14,13 @@ const ProductForm: React.FC = () => {
     quantity: 50,
     discType: DiscType.CD,
     category: Category.Rock,
-    recordLabel: '',
+    recordLabel: 'Skibidi Records',
     releaseYear: 2024,
     description: 'No description available yet.',
     cover: '',
     ean: '',
     receiptProducts: [],
+    couponProducts: [],
   });
 
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -130,12 +131,13 @@ const ProductForm: React.FC = () => {
         quantity: 50,
         discType: DiscType.CD,
         category: Category.Rock,
-        recordLabel: '',
+        recordLabel: 'Skibidi Records',
         releaseYear: 2024,
         description: 'No description available yet.',
         cover: '',
         ean: '',
         receiptProducts: [],
+        couponProducts: [],
       });
 
       // Update the existing albums list to reflect the newly added album
@@ -159,6 +161,7 @@ const ProductForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('formData:', formData)
 
     try {
       const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {

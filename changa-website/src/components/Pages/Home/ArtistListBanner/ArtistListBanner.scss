@@ -1,0 +1,60 @@
+.artist-list-banner-header {
+    display: flex;
+    justify-content: start;
+    width: max-content;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-inline: 0.5rem;
+    height: min-content;
+    background-color: rgb(13, 13, 13);
+
+    h2 {
+        color: white;
+        font-size: 1.2rem; // Adjust the font size as needed
+        font-weight: 200;
+        margin: 0;
+    }
+}
+
+.artist-list-banner {
+    width: 100vw;
+    aspect-ratio: 6/2;
+    display: inline-grid;
+    gap: 0.5rem;
+    background-color: black;
+    grid-template-columns: repeat(5, 1fr);
+
+    .artist-image-container {
+        position: relative; // Allows absolute positioning for the name overlay
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease; // Smooth transition for the blur effect
+        }
+
+        &:hover img {
+            filter: blur(5px); // Apply blur effect on hover
+        }
+
+        .artist-name {
+            position: absolute; // Position over the image
+            color: white;
+            font-size: 1.5rem; // Adjust the font size as needed
+            text-align: center;
+            transition: opacity 0.3s ease; // Smooth transition for visibility
+            opacity: 0; // Initially hidden
+        }
+
+        &:hover .artist-name {
+            opacity: 1; // Show name on hover
+        }
+    }
+}

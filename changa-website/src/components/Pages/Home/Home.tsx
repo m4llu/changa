@@ -1,6 +1,8 @@
 import React from 'react';
 import Banner from '../../Banner/Banner';
-import Sections from '../../Sections/Sections';
+import SearchableProductList from './HomeProductSection/HomeProductSection';
+import ProductForm from '../../ProductForm/ProductForm';
+import ArtistListBanner from './ArtistListBanner/ArtistListBanner';
 
 const Home: React.FC = () => {
     const banner = document.querySelector('.banner');
@@ -8,7 +10,9 @@ const Home: React.FC = () => {
   return (
     <div className="home-page">
       <Banner />
-      <Sections />
+      <ArtistListBanner />
+      <SearchableProductList />
+      <ProductForm />
     </div>
   );
 };
