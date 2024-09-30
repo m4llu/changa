@@ -15,6 +15,7 @@
     margin: 0.5rem 0 0;
     background: linear-gradient(var(--secondary-color), var(--tertiary-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   
@@ -30,6 +31,7 @@
   .text-gradient {
     background: linear-gradient(var(--secondary-color), var(--tertiary-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 

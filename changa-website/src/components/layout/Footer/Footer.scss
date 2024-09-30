@@ -3,6 +3,7 @@
 .changa {
     background: linear-gradient(100deg, var(--gradientEnd), var(--gradientStart));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
@@ -49,6 +50,7 @@
                     padding-bottom: 10px;
                     background: linear-gradient(30deg, var(--gradientStart), var(--gradientEnd));
                     -webkit-background-clip: text;
+                    background-clip: text;
                     -webkit-text-fill-color: transparent;
                 }
 
@@ -72,6 +74,7 @@
                             &:hover {
                                 background: linear-gradient(100deg, var(--gradientEnd), var(--gradientStart));
                                 -webkit-background-clip: text;
+                                background-clip: text;
                                 -webkit-text-fill-color: transparent;
                             }
                         }

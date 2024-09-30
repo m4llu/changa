@@ -57,6 +57,7 @@
         &.selected-page {
           background: linear-gradient($secondary-color, $tertiary-color);
           -webkit-background-clip: text;
+          background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 
