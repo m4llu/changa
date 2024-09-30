@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './scss/main.scss';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/layout/Navbar/Navbar';
 import useStickyNav from './hooks/useStickyNav';
-import Home from './components/Pages/Home/Home';
-import Login from './components/Pages/Login/Login';
-import Discover from './components/Pages/Discover/AlbumPage';
-import AnnouncementBar from './components/Navbar/AnnouncementBar';
-import Footer from './components/Footer/Footer';
+import Home from './components/pages/Home/Home';
+import Login from './components/pages/Login/Login';
+import Discover from './components/pages/Discover/AlbumPage';
+import AnnouncementBar from './components/layout/Navbar/AnnouncementBar';
+import Footer from './components/layout/Footer/Footer';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.scss';
-import logo from '../../assets/CHANGA.svg';
+import logo from '../../../assets/images/CHANGA.svg';
 
 interface NavbarProps {
   onNavClick: (page: string) => void;

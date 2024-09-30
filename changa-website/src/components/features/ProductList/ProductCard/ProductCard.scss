@@ -1,0 +1,121 @@
+.product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0; // Light border for a clean look
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; // Transition effects for hover
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+    margin: 1rem; // Add margin for spacing between cards
+    max-width: 300px; // Limit the max width of the card
+    width: 100%; // Allow card to expand in smaller screens
+
+    &:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); // Enhanced shadow on hover
+        transform: translateY(-2px); // Slight lift effect on hover
+    }
+
+    // Container for the image to maintain aspect ratio and maximum size
+    &__image-container {
+        width: 100%; // Full width of the card
+        position: relative; // Positioning context for the image
+        aspect-ratio: 1;
+
+        &__image {
+            position: absolute; // Absolutely position the image
+            top: 0; // Align to top
+            left: 0; // Align to left
+            width: 100%; // Full width
+            height: 100%; // Full height
+            object-fit: cover; // Cover the container without distortion
+            transition: transform 0.3s ease; // Smooth scaling effect on hover
+
+            &:hover {
+                transform: scale(1.05); // Slight scale effect on image hover
+            }
+        }
+    }
+
+    &__info {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1; // Allows info to expand
+        background-color: #fff; // White background for the info section
+    }
+
+    &__artist {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0;
+        color: #333; // Dark text color for better readability
+    }
+
+    &__album {
+        font-size: 1rem;
+        color: #666; // Lighter color for album name
+        margin: 0.5rem 0;
+    }
+
+    &__description {
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+        color: #555; // Slightly lighter than the album text
+        flex-grow: 1; // Allows it to take space between other elements
+    }
+
+    &__price {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #db3477; // Emphasized price color
+        margin: 0.5rem 0;
+    }
+
+    &__release-year {
+        font-size: 0.9rem;
+        color: #999; // Lighter color for less emphasis
+        margin-bottom: 0.5rem; // Space before button
+    }
+
+    &__button {
+        padding: 0.5rem;
+        border: none;
+        background-color: #db3477; // Primary button color
+        color: white; // Button text color
+        cursor: pointer;
+        border-radius: 0.3rem;
+        transition: background 0.3s, transform 0.2s; // Added transition for button hover effect
+
+        &:hover {
+            background-color: #a02456; // Darker shade on hover
+            transform: scale(1.05); // Slight scale effect on hover
+        }
+    }
+
+    // Styles for row layout
+    &.row {
+        flex-direction: row; // Align elements in a row
+        align-items: center; // Center align items
+
+        &__image-container {
+            width: 100px; // Fixed size for row layout
+            aspect-ratio: 1; // Maintain 1:1 aspect ratio
+            height: 0; // Set height to zero for aspect ratio
+            margin-right: 1rem; // Space between image and info
+        }
+
+        &__info {
+            flex-grow: 1; // Allows info to take up remaining space
+            display: flex;
+            flex-direction: column; // Keep info elements stacked
+        }
+    }
+
+    // Styles for grid layout
+    &.grid {
+        flex-direction: column; // Stack elements vertically in grid view
+    }
+}
+
+// Responsive adjustments
+

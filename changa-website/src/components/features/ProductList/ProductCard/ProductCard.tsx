@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProductCard.scss'; // Import styles for the product card
-import { Product } from '../../../types/Product'; // Import the Product type
-import ShoppingCartButton from '../../core/Button/CartButton'; // Import the ShoppingCartButton
+import { Product } from '../../../../types/Product'; // Import the Product type
+import ShoppingCartButton from '../../../common/Button/CartButton'; // Import the ShoppingCartButton
 
 interface ProductCardProps {
     product: Product; // The product to display
@@ -21,8 +21,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, variant
             </div>
             <div className="product-card__info">
                 <div>
-                    <h3 className="product-card__artist">{product.artist}</h3>
-                    <h4 className="product-card__album">{product.album}</h4>
+                    <h3 className="product-card__artist">{product.album}</h3>
+                    <h4 className="product-card__album">{product.artist}</h4>
                 </div>
                 <div className='product-card__bottom-container'>
                     <ShoppingCartButton 
