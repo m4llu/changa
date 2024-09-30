@@ -99,7 +99,10 @@ const Sections: React.FC = () => {
                   <ProductList products={products} layout="grid" onAddToCart={console.log} />
 
                   <h1>Product List</h1>
-                  <ProductList products={products} layout="list" onAddToCart={console.log} />
+                  <div style={{width: '70%'}}>
+                  <ProductList products={products} layout="list" onAddToCart={console.log}/>
+
+                  </div>
                 </div>
             </section>
         </>
