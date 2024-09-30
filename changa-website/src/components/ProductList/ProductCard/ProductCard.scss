@@ -1,122 +1,136 @@
-.product-card {
+.product-card { 
     display: flex;
-    flex-direction: column;
-    border: 1px solid #e0e0e0; // Light border for a clean look
-    border-radius: 0.5rem;
+    flex-direction: column; // Default to stack layout
+    background-color: #fff;
+    border-radius: 0.2em;
     overflow: hidden;
-    transition: box-shadow 0.3s ease, transform 0.3s ease; // Transition effects for hover
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
-    margin: 1rem; // Add margin for spacing between cards
-    max-width: 300px; // Limit the max width of the card
-    width: 100%; // Allow card to expand in smaller screens
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    height: 400px; // Fixed height for uniformity in stack layout
+    width: 100%;
+    position: relative;
 
     &:hover {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); // Enhanced shadow on hover
-        transform: translateY(-2px); // Slight lift effect on hover
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     }
 
-    // Container for the image to maintain aspect ratio and maximum size
+    // Image Container
     &__image-container {
-        width: 100%; // Full width of the card
-        position: relative; // Positioning context for the image
-        padding-top: 100%; // Maintain a square aspect ratio
+        position: relative;
+        width: 100%;
+        padding-top: 100%; // 1:1 aspect ratio
+        overflow: hidden;
 
-        &__image {
-            position: absolute; // Absolutely position the image
-            top: 0; // Align to top
-            left: 0; // Align to left
-            width: 100%; // Full width
-            height: 100%; // Full height
-            object-fit: cover; // Cover the container without distortion
-            max-height: 200px; // Max height for images
-            transition: transform 0.3s ease; // Smooth scaling effect on hover
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; // Cover image within container
+        }
+    }
+
+    // Info Section
+    &__info {
+        padding: 16px;
+        display: flex;
+        flex-direction: column; // Default stack direction
+        flex-grow: 1; // Grow to fill space
+        gap: 1em;
+
+        h3, h4 {
+            margin: 0;
+            font-weight: 600; // Make headings bold
+            color: #333; // Darker color for better readability
+            overflow: hidden; // Prevent overflow
+            text-overflow: ellipsis; // Show ellipsis if text overflows
+            white-space: nowrap; // Prevent wrapping
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.4; // Improved line spacing
+            color: #666; // Subtle color for descriptions
+            overflow: hidden; // Prevent overflow
+            text-overflow: ellipsis; // Show ellipsis if text overflows
+            white-space: nowrap; // Prevent wrapping
+        }
+
+        // Release Year
+        .product-card__release-year {
+            font-size: 0.9rem;
+            color: #888; // Subtle color for release year
+            margin-top: 4px; // Slightly spaced from price
+        }
+    }
+
+    &__bottom-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; // Center vertically
+
+        &__button {
+            padding: 12px 0; // Padding for better touch target
+            background-color: #000; // Black background
+            color: #fff; // White text
+            border: none;
+            border-radius: 0.2em; // Rounded bottom corners
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem; // Standard button size
+            width: 100%; // Full width for button
 
             &:hover {
-                transform: scale(1.05); // Slight scale effect on image hover
+                background-color: #333; // Darker shade on hover
             }
         }
     }
 
-    &__info {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1; // Allows info to expand
-        background-color: #fff; // White background for the info section
-    }
-
-    &__artist {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 0;
-        color: #333; // Dark text color for better readability
-    }
-
-    &__album {
-        font-size: 1rem;
-        color: #666; // Lighter color for album name
-        margin: 0.5rem 0;
-    }
-
-    &__description {
-        font-size: 0.9rem;
-        margin: 0.5rem 0;
-        color: #555; // Slightly lighter than the album text
-        flex-grow: 1; // Allows it to take space between other elements
-    }
-
-    &__price {
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: #db3477; // Emphasized price color
-        margin: 0.5rem 0;
-    }
-
-    &__release-year {
-        font-size: 0.9rem;
-        color: #999; // Lighter color for less emphasis
-        margin-bottom: 0.5rem; // Space before button
-    }
-
-    &__button {
-        padding: 0.5rem;
-        border: none;
-        background-color: #db3477; // Primary button color
-        color: white; // Button text color
-        cursor: pointer;
-        border-radius: 0.3rem;
-        transition: background 0.3s, transform 0.2s; // Added transition for button hover effect
-
-        &:hover {
-            background-color: #a02456; // Darker shade on hover
-            transform: scale(1.05); // Slight scale effect on hover
-        }
-    }
-
-    // Styles for row layout
+    // Row Layout Styling
     &.row {
-        flex-direction: row; // Align elements in a row
-        align-items: center; // Center align items
+        flex-direction: row; // Set to row layout
+        height: auto; // Allow height to adjust based on content
 
         &__image-container {
-            width: 100px; // Fixed size for row layout
-            aspect-ratio: 1; // Maintain 1:1 aspect ratio
-            height: 0; // Set height to zero for aspect ratio
-            margin-right: 1rem; // Space between image and info
+            width: 150px; // Fixed width for image
+            height: 150px; // Fixed height for image
+            flex-shrink: 0; // Prevent image from shrinking
+            padding-top: 0; // Remove aspect ratio padding
         }
 
         &__info {
-            flex-grow: 1; // Allows info to take up remaining space
-            display: flex;
-            flex-direction: column; // Keep info elements stacked
+            padding: 12px; // Adjust padding for row layout
+            flex-grow: 1; // Allow info section to grow and fill space
+            display: flex; 
+            flex-direction: column; // Stack content vertically
+            justify-content: space-between; // Space items evenly
+        }
+
+        &__bottom-container {
+            align-items: flex-end; // Align items to the bottom
+            margin-top: auto; // Push bottom container to the end
         }
     }
 
-    // Styles for grid layout
-    &.grid {
-        flex-direction: column; // Stack elements vertically in grid view
+    // Responsive Design
+    @media (max-width: 768px) {
+        height: auto; // Allow height to adjust on smaller screens
+        .product-card__info {
+            padding: 12px; // Reduce padding for smaller screens
+        }
+
+        &.row {
+            flex-direction: column; // Stack on smaller screens for row layout
+            .product-card__image-container {
+                width: 100%; // Full width for image in mobile view
+                height: auto; // Maintain aspect ratio on smaller screens
+                padding-top: 100%; // Reapply aspect ratio
+            }
+
+            .product-card__info {
+                padding: 16px; // Adjust padding for better mobile experience
+            }
+        }
     }
 }
-
-// Responsive adjustments
-
