@@ -15,7 +15,7 @@ const Home: React.FC = () => {
             setError(null);
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {
+                const response = await fetch(`${import.meta.env.VITE_LOCAL_DEBUG_API_URL}/Products`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -1,42 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Navbar.scss';
 import logo from '../../../assets/images/CHANGA.svg';
+import { User } from '../../../types/User';
 
 interface NavbarProps {
   onNavClick: (page: string) => void;
   currentPage: string;
+  isLoggedIn: boolean; // New prop to check if user is logged in
+  onLogout: () => void; // New prop for logout function
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavClick, currentPage }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(prevState => !prevState);
-  };
+const Navbar: React.FC<NavbarProps> = ({ onNavClick, currentPage, isLoggedIn, onLogout }) => {
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 728) {
-        setMenuOpen(false);
-      }
-    };
+    const userData = localStorage.getItem('user'); // Retrieve user data from local storage
+    if (userData) {
+      const user: User = JSON.parse(userData); // Parse the user object
+      setUserName(user.name); // Set the user's name
+    }
+  }, [isLoggedIn]); // Run this effect whenever the login state changes
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Call initially to set correct state
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const handleSignInClick = () => {
+    onNavClick('login'); // Navigate to login page
+  };
 
   return (
-    <nav className={`sticky-nav ${menuOpen ? 'shrink' : ''}`}>
-      <div className="hamburger" onClick={toggleMenu}>
+    <nav className={`sticky-nav`}>
+      <div className="hamburger" onClick={() => { /* Toggle menu logic */ }}>
         <div></div>
         <div></div>
         <div></div>
       </div>
-      <ul className={menuOpen ? 'open' : ''}>
+      <ul>
         <li>
           <a 
             onClick={() => onNavClick('home')} 
@@ -62,12 +58,11 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, currentPage }) => {
           </a>
         </li>
         <li>
-          <a 
-            onClick={() => onNavClick('login')} 
-            className={currentPage === 'login' ? 'selected-page' : ''}
-          >
-            Sign In
-          </a>
+          {isLoggedIn ? (
+            <span onClick={onLogout} className="user-name">{userName}</span> // Display user's name from state
+          ) : (
+            <a onClick={handleSignInClick} className="login-link">Login</a>
+          )}
         </li>
       </ul>
       <div className="logo-container">

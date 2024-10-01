@@ -7,21 +7,24 @@ import Login from './components/pages/Login/Login';
 import Discover from './components/pages/Discover/AlbumPage';
 import AnnouncementBar from './components/layout/Navbar/AnnouncementBar';
 import Footer from './components/layout/Footer/Footer';
+import { User } from './types/User';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  });
+  const [user, setUser] = useState<User | null>(null); // Initialize user as null
+
   const alwaysShrink = currentPage !== 'home';
-  
   useStickyNav(alwaysShrink);
 
   useEffect(() => {
     const stickyNav = document.querySelector('.sticky-nav');
     const banner = document.querySelector('.banner');
 
-    // Scroll to top when page changes
     window.scrollTo(0, 0);
 
-    // Handle navbar shrink based on the current page
     if (currentPage === 'home') {
       stickyNav?.classList.remove('shrink');
       banner?.classList.remove('low');
@@ -30,18 +33,30 @@ const App: React.FC = () => {
       banner?.classList.add('low');
     }
 
-    // Conditionally set overflow-y hidden
     if (currentPage !== 'home') {
       document.body.style.overflowY = 'hidden';
     } else {
       document.body.style.overflowY = 'auto';
     }
 
-    // Cleanup when component unmounts or currentPage changes
     return () => {
-      document.body.style.overflowY = 'auto'; // Reset to default when leaving the login page
+      document.body.style.overflowY = 'auto';
     };
   }, [currentPage]);
+
+  const handleLogin = (userData: User) => {
+    setIsLoggedIn(true);
+    setUser(userData); // Set the entire user object
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('user', JSON.stringify(userData)); // Store the user object in local storage
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser(null); // Reset the user object
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user'); // Remove user from local storage
+  };
 
   const renderPage = () => {
     switch (currentPage) {
@@ -52,7 +67,7 @@ const App: React.FC = () => {
       case 'about':
         return <Home />;
       case 'login':
-        return <Login />;
+        return <Login onLogin={handleLogin} />; // Pass onLogin prop
       default:
         return <Home />;
     }
@@ -61,7 +76,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <AnnouncementBar />
-      <Navbar onNavClick={setCurrentPage} currentPage={currentPage} /> {/* Pass currentPage prop */}
+      <Navbar 
+        onNavClick={setCurrentPage} 
+        currentPage={currentPage} 
+        isLoggedIn={isLoggedIn} // Pass isLoggedIn prop
+        onLogout={handleLogout} // Pass logout function
+      />
       <main>
         {renderPage()}
       </main>
