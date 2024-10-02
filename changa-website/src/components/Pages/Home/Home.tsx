@@ -3,6 +3,7 @@ import Banner from '../../features/banners/CollectionBanner/CollectionBanner';
 import ProductList from '../../features/ProductList/ProductList';
 import ArtistListBanner from '../../features/banners/ArtistListBanner/ArtistListBanner';
 import { Product } from '../../../types/Product';
+import HomeProductSection from './HomeProductSection/HomeProductSection';
 
 const Home: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -67,7 +68,7 @@ const Home: React.FC = () => {
             <Banner />
             <ArtistListBanner />
             {/* Now using ProductList directly */}
-            <ProductList products={products} layout="grid" enableSearch={true} onAddToCart={console.log} />
+            <HomeProductSection />
         </div>
     );
 };

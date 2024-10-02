@@ -8,6 +8,7 @@ import Discover from './components/pages/Discover/AlbumPage';
 import AnnouncementBar from './components/layout/Navbar/AnnouncementBar';
 import Footer from './components/layout/Footer/Footer';
 import { User } from './types/User';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'; // Import Router components
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -74,19 +75,24 @@ const App: React.FC = () => {
   };
 
   return (
+    <Router>
     <div className="App">
       <AnnouncementBar />
       <Navbar 
-        onNavClick={setCurrentPage} 
-        currentPage={currentPage} 
         isLoggedIn={isLoggedIn} // Pass isLoggedIn prop
         onLogout={handleLogout} // Pass logout function
       />
       <main>
-        {renderPage()}
+      <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            {/* Add more routes as needed */}
+        </Routes>
       </main>
       <Footer />
     </div>
+    </Router>
   );
 };
 
