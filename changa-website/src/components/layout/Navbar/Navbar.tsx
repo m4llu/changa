@@ -65,7 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
           )}
         </li>
       </ul>
-      <div className="logo-container">
+      <div className="logo-container" id='logoContainer'>
         <img src={logo} alt="Logo" className="logo" id="logo" />
         <h2 className="logo-phrase">Listen to the voices.</h2>
       </div>

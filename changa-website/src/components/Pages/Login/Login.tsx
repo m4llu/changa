@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import './Login.scss';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: string; // Assuming Role is a string
-  created: string; // ISO string for DateTime
-}
+import { User } from '../../../types/User'; // Ensure the User type includes the token property if necessary
 
 interface LoginProps {
-  onLogin: (user: User) => void; // Update the onLogin prop to accept the entire user object
+  onLogin: (user: User) => void; // Callback function to pass the user object after successful login
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
@@ -32,7 +25,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           'X-API-KEY': `${import.meta.env.VITE_API_KEY}`,
         },
         body: JSON.stringify({
-          name: email,
+          name: email, // Use email field (assuming API expects 'email')
           password: password,
         }),
       });
@@ -42,14 +35,16 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         throw new Error(message?.error || 'Login failed');
       }
 
-      const data: User = await response.json(); // Adjust the type based on your API response structure
-      console.log('Login successful:', data);
+      const data: { token: string; user: User } = await response.json(); // Expecting the API to return the user data and JWT token
 
+      // Store JWT token in localStorage
       localStorage.setItem('token', data.token);
-      onLogin(data); // Pass the entire user object to the onLogin function
 
-      window.location.href = '/dashboard'; // Adjust as needed
+      // Call the onLogin function with the user data
+      onLogin(data.user);
 
+      // Optionally redirect the user after successful login
+      window.location.href = '/dashboard'; // Adjust this URL to the appropriate route in your application
     } catch (error: any) {
       setError(error.message);
     } finally {
@@ -65,7 +60,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
-          <label htmlFor="email">Email (username for now)</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
             id="email"
@@ -89,8 +84,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         <button type="submit" className="login-button" disabled={loading}>
           {loading ? 'Logging in...' : 'Login'}
         </button>
-        
-        <p className='already-account'>Already have an account?</p>
+
+        <p className='already-account'>Don't have an account? <a href="/register">Sign Up</a></p> {/* Adjust link as needed */}
       </form>
     </div>
   );

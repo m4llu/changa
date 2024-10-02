@@ -8,7 +8,10 @@ import Discover from './components/pages/Discover/AlbumPage';
 import AnnouncementBar from './components/layout/Navbar/AnnouncementBar';
 import Footer from './components/layout/Footer/Footer';
 import { User } from './types/User';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'; // Import Router components
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Router components
+import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import { AuthProvider } from './context/AuthContext';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -59,40 +62,46 @@ const App: React.FC = () => {
     localStorage.removeItem('user'); // Remove user from local storage
   };
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <Home />;
-      case 'discover':
-        return <Discover />;
-      case 'about':
-        return <Home />;
-      case 'login':
-        return <Login onLogin={handleLogin} />; // Pass onLogin prop
-      default:
-        return <Home />;
-    }
-  };
-
   return (
+    <AuthProvider>
     <Router>
-    <div className="App">
-      <AnnouncementBar />
-      <Navbar 
-        isLoggedIn={isLoggedIn} // Pass isLoggedIn prop
-        onLogout={handleLogout} // Pass logout function
-      />
-      <main>
-      <Routes>
+      <div className="App">
+        <AnnouncementBar />
+        <Navbar 
+          isLoggedIn={isLoggedIn} // Pass isLoggedIn prop
+          onLogout={handleLogout} // Pass logout function
+        />
+        <main>
+          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            {/* Add more routes as needed */}
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+            
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover />} />
+
+            {/* Protected Route for Dashboard (Admin only) */}
+            <Route
+              path="/dashboard"
+              element={
+            <ProtectedRoute
+              redirectPath="/dashboard"
+              isAllowed={
+                !!user && user.role === '1'
+              }
+            >
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />       
+            {/* Add more routes for other protected pages here */}
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
+    </AuthProvider>
   );
 };
 

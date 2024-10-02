@@ -14,21 +14,35 @@
 
   // Logo container styles
   .logo-container {
+    display: flex;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 80%);
+    width: 100%;
+    left: 0;
+    height: 20rem;
+    flex-direction: column;
+    justify-content: center;
+    transform: translateY(50%);
     transition: all 0.3s ease;
+    align-items: start;
 
     .logo {
       height: 6rem;
-      transition: height 0.3s ease;
+      transition: all 0.3s ease-in-out;
+      transform: translateX(calc(50vw - 50%));
     }
 
     .logo-phrase {
       display: block;
       transition: all 0;
-      text-align: left;
+      text-align: center;
+      font-size: 2vw;
+      transition: all 0.3s ease-in-out;
+      transform: translateX(33vw);
+
+      @media only screen and (max-width: 968px) {
+        transform: translateX(25vw);
+        font-size: 3vw;
+      }
     }
   }
 
@@ -129,17 +143,17 @@
 
     // Adjust logo container and logo size when .shrink is applied
     .logo-container {
-      top: 0;
-      left: 0;
-      transform: translate(0, 0);
-      height: 100%;
+      height: 3rem;
       padding: 0 1rem;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      justify-content: center;
+      align-items: start;
+      transform: translateY(0);
 
       .logo {
         height: 2rem;
+        margin-left: 1rem;
+        transform: translateX(0);
       }
 
       .logo-phrase {
@@ -162,6 +176,7 @@
     }
 
     .logo-container {
+      height: 15rem;
       .logo {
         height: 4rem;
       }
@@ -188,6 +203,7 @@
   }
   .sticky-nav {
     .logo-container {
+      height: 10rem;
       .logo {
         height: 3rem;
       }

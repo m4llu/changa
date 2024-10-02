@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CollectionBanner.scss';
 import BannerImage from './BannerImage.svg';
 
 const CollectionBanner: React.FC = () => {
+  const [marginTop, setMarginTop] = useState<number>(0);
+
+  useEffect(() => {
+    const logoContainer = document.getElementById('logoContainer');
+    
+    // Check if element exists
+    if (!logoContainer) return;
+
+    // Function to update the margin-top value
+    const updateMarginTop = () => {
+      setMarginTop(logoContainer.clientHeight + 25);
+    };
+
+    // Initialize marginTop on mount
+    updateMarginTop();
+
+    // Create a ResizeObserver to watch for changes in the logoContainer height
+    const resizeObserver = new ResizeObserver(() => {
+      updateMarginTop();
+    });
+
+    // Start observing the element
+    resizeObserver.observe(logoContainer);
+
+    // Cleanup the observer when the component unmounts
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []); // Empty dependency array to run only once when the component mounts
+
   // Function to handle scrolling
   const scrollToNextSection = () => {
     const bannerHeight = document.querySelector('.banner')?.clientHeight;
@@ -15,7 +45,7 @@ const CollectionBanner: React.FC = () => {
   };
 
   return (
-    <div className="banner">
+    <div className="banner" style={{ marginTop: `${marginTop}px` }}>
       <div className="align-center-container">
         <div className="banner-text-container" onClick={scrollToNextSection}>
           <div className="top">

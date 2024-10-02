@@ -4,14 +4,9 @@
   font-family: 'Readex Pro', sans-serif;
   aspect-ratio: 4 / 2;
   width: 100vw;
-  margin-top: 20rem;
-  transition: margin-top 0.4s ease;
+  transition: margin-top 0.1s ease-out;
   background: $background-gradient;
   overflow: hidden;
-
-  &.low {
-    margin-top: 0rem;
-  }
 
   .banner-image {
     position: relative;
