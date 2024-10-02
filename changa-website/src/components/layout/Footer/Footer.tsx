@@ -3,8 +3,8 @@ import { FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaCcApplePay, FaCcPaypal
 import { FaCcVisa, FaCcMastercard, FaBitcoin, FaGooglePay } from 'react-icons/fa';
 import { SiMonero } from 'react-icons/si'; // Monero icon from react-icons
 import './Footer.scss';
-import Button from '../core/Button/Button';
-import Input from '../core/Input/Input';
+import Button from '../../common/Button/Button';
+import Input from '../../common/Input/Input';
 
 const Footer: React.FC = () => {
     return (

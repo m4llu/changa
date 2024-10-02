@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Product, DiscType, Category } from '../../types/Product'; // Adjust the path as necessary
+import { Product, DiscType, Category } from '../../../types/Product'; // Adjust the path as necessary
 import './ProductForm.scss';
 
 const ProductForm: React.FC = () => {

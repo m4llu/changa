@@ -3,23 +3,23 @@ import './ArtistListBanner.scss';
 
 const artistData = [
     {
-        name: '1. Taylor Swift',
+        name: 'Taylor Swift',
         image: 'https://routenote.com/blog/wp-content/uploads/2024/03/1.-Taylor-Swift.jpeg',
     },
     {
-        name: '2. Drake',
+        name: 'Drake',
         image: 'https://routenote.com/blog/wp-content/uploads/2023/02/2.-Drake.jpeg',
     },
     {
-        name: '3. Kendrick Lamar',
+        name: 'Kendrick Lamar',
         image: 'https://routenote.com/blog/wp-content/uploads/2024/04/4.-Kendrick-Lamar.jpeg',
     },
     {
-        name: '4. Eminem',
+        name: 'Eminem',
         image: 'https://routenote.com/blog/wp-content/uploads/2023/02/8.-Eminem.jpeg',
     },
     {
-        name: '5. The Weeknd',
+        name: 'The Weeknd',
         image: 'https://routenote.com/blog/wp-content/uploads/2023/02/4.-The-Weeknd.jpeg',
     }
 ];

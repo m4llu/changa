@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import './scss/main.scss';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/layout/Navbar/Navbar';
 import useStickyNav from './hooks/useStickyNav';
-import Home from './components/Pages/Home/Home';
-import Login from './components/Pages/Login/Login';
-import Discover from './components/Pages/Discover/AlbumPage';
-import AnnouncementBar from './components/Navbar/AnnouncementBar';
-import Footer from './components/Footer/Footer';
+import Home from './components/pages/Home/Home';
+import Login from './components/pages/Login/Login';
+import Discover from './components/pages/Discover/AlbumPage';
+import AnnouncementBar from './components/layout/Navbar/AnnouncementBar';
+import Footer from './components/layout/Footer/Footer';
+import { User } from './types/User';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'; // Import Router components
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  });
+  const [user, setUser] = useState<User | null>(null); // Initialize user as null
+
   const alwaysShrink = currentPage !== 'home';
-  
   useStickyNav(alwaysShrink);
 
   useEffect(() => {
     const stickyNav = document.querySelector('.sticky-nav');
     const banner = document.querySelector('.banner');
 
-    // Scroll to top when page changes
     window.scrollTo(0, 0);
 
-    // Handle navbar shrink based on the current page
     if (currentPage === 'home') {
       stickyNav?.classList.remove('shrink');
       banner?.classList.remove('low');
@@ -30,18 +34,30 @@ const App: React.FC = () => {
       banner?.classList.add('low');
     }
 
-    // Conditionally set overflow-y hidden
     if (currentPage !== 'home') {
       document.body.style.overflowY = 'hidden';
     } else {
       document.body.style.overflowY = 'auto';
     }
 
-    // Cleanup when component unmounts or currentPage changes
     return () => {
-      document.body.style.overflowY = 'auto'; // Reset to default when leaving the login page
+      document.body.style.overflowY = 'auto';
     };
   }, [currentPage]);
+
+  const handleLogin = (userData: User) => {
+    setIsLoggedIn(true);
+    setUser(userData); // Set the entire user object
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('user', JSON.stringify(userData)); // Store the user object in local storage
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser(null); // Reset the user object
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user'); // Remove user from local storage
+  };
 
   const renderPage = () => {
     switch (currentPage) {
@@ -52,21 +68,31 @@ const App: React.FC = () => {
       case 'about':
         return <Home />;
       case 'login':
-        return <Login />;
+        return <Login onLogin={handleLogin} />; // Pass onLogin prop
       default:
         return <Home />;
     }
   };
 
   return (
+    <Router>
     <div className="App">
       <AnnouncementBar />
-      <Navbar onNavClick={setCurrentPage} currentPage={currentPage} /> {/* Pass currentPage prop */}
+      <Navbar 
+        isLoggedIn={isLoggedIn} // Pass isLoggedIn prop
+        onLogout={handleLogout} // Pass logout function
+      />
       <main>
-        {renderPage()}
+      <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            {/* Add more routes as needed */}
+        </Routes>
       </main>
       <Footer />
     </div>
+    </Router>
   );
 };
 

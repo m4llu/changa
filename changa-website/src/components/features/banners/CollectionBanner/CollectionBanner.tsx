@@ -1,8 +1,8 @@
 import React from 'react';
-import './Banner.scss';
+import './CollectionBanner.scss';
 import BannerImage from './BannerImage.svg';
 
-const Banner: React.FC = () => {
+const CollectionBanner: React.FC = () => {
   // Function to handle scrolling
   const scrollToNextSection = () => {
     const bannerHeight = document.querySelector('.banner')?.clientHeight;
@@ -36,4 +36,4 @@ const Banner: React.FC = () => {
   );
 };
 
-export default Banner;
+export default CollectionBanner;

@@ -36,16 +36,14 @@ const useStickyNav = (alwaysShrink: boolean = false) => {
       let lastRan: number | undefined = undefined;
     
       return function(this: unknown, ...args: []) {
-        const context = this;
-    
         if (!lastRan) {
-          func.apply(context, args);
+          func.apply(this, args);
           lastRan = Date.now();
         } else {
           if (lastFunc) clearTimeout(lastFunc);
-          lastFunc = setTimeout(function() {
+          lastFunc = setTimeout(() => {
             if (Date.now() - lastRan! >= limit) {
-              func.apply(context, args);
+              func.apply(this, args);
               lastRan = Date.now();
             }
           }, limit - (Date.now() - lastRan!));

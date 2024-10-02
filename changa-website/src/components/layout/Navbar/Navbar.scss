@@ -1,4 +1,4 @@
-@import '../../scss/variables'; // Adjust path if necessary
+@import '../../../scss/variables'; // Adjust path if necessary
 
 // Base styles for the sticky navigation
 .sticky-nav {
@@ -57,6 +57,7 @@
         &.selected-page {
           background: linear-gradient($secondary-color, $tertiary-color);
           -webkit-background-clip: text;
+          background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 

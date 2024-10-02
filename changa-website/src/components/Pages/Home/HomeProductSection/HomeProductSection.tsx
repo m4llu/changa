@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Input from '../../../core/Input/Input';
-import ProductList from '../../../ProductList/ProductList'; // Adjust the import according to your file structure
+import { useNavigate } from 'react-router-dom'; // Add this import for navigation
+import Input from '../../../common/Input/Input';
+import ProductList from '../../../features/ProductList/ProductList'; // Adjust the import according to your file structure
 import { Product } from '../../../../types/Product'; // Adjust the import for the Product interface
 import './HomeProductSection.scss';
+import Button from '../../../common/Button/Button';
 
 const HomeProductSection: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -10,6 +12,8 @@ const HomeProductSection: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>('');
+    const [visibleProducts, setVisibleProducts] = useState<Product[]>([]); // Products to display
+    const navigate = useNavigate(); // Initialize useNavigate for navigation
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -17,7 +21,7 @@ const HomeProductSection: React.FC = () => {
             setError(null);
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {
+                const response = await fetch(`${import.meta.env.VITE_LOCAL_DEBUG_API_URL}/Products`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -59,6 +63,27 @@ const HomeProductSection: React.FC = () => {
         fetchProducts();
     }, []);
 
+    // Update visible products based on screen width
+    const updateVisibleProducts = () => {
+        const windowWidth = window.innerWidth;
+        let productsPerRow: number;
+
+        // Define how many products per row based on screen width
+        if (windowWidth >= 1400) {
+            productsPerRow = 5;
+        } else if (windowWidth >= 1200) {
+            productsPerRow = 4;
+        } else if (windowWidth >= 768) {
+            productsPerRow = 3;
+        } else {
+            productsPerRow = 2;
+        }
+
+        const maxVisibleProducts = productsPerRow * 2; // Two rows of products
+        setVisibleProducts(filteredProducts.slice(0, maxVisibleProducts));
+    };
+
+    // Filter products based on search term
     useEffect(() => {
         if (searchTerm) {
             const filtered = products.filter(product =>
@@ -69,25 +94,34 @@ const HomeProductSection: React.FC = () => {
         } else {
             setFilteredProducts(products);
         }
+        updateVisibleProducts(); // Ensure visibility is updated after filtering
     }, [searchTerm, products]);
+
+    // Listen to window resize event and update visible products
+    useEffect(() => {
+        window.addEventListener('resize', updateVisibleProducts);
+        updateVisibleProducts(); // Initial call to update visibility
+        return () => window.removeEventListener('resize', updateVisibleProducts); // Cleanup
+    }, [filteredProducts]);
+
+    const handleNavigate = () => {
+        navigate('/products'); // Navigate to the products page
+    };
 
     if (loading) return <p>Loading products...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
         <section style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-            
             <div style={{ width: '100%' }}>
-                <div className='product-list__header'>
-                <Input
-                variant="search"
-                placeholder="Search by album or artist..."
-                inputSize="large"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
-                </div>
-                <ProductList products={products} layout="grid" onAddToCart={console.log} />
+                {/* Display only the filtered products that fit in 2 rows */}
+                <ProductList products={visibleProducts} layout="grid" fade={true} onAddToCart={console.log} 
+                footer={
+                    <Button onClick={handleNavigate} variant='secondary' size='small'>
+                        View All Products
+                    </Button>
+                }
+                />
             </div>
         </section>
     );

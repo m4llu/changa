@@ -1,14 +1,12 @@
 // src/components/Pages/Discover/Discover.tsx
 import React from 'react';
-import CategoryList from './CategoryList/CategoryList';
-import AlbumList from './AlbumList/AlbumList';
 import './AlbumPage.scss';
 
 const AlbumPage: React.FC = () => {
   return (
     <main className="album-page">
       <aside className="category-list" aria-label="Album Categories">
-        <CategoryList />
+
       </aside>
       <section className="album-section">
         <header className="album-header">
@@ -20,7 +18,7 @@ const AlbumPage: React.FC = () => {
             Page 1 of 10
           </nav>
         </header>
-        <AlbumList />
+
       </section>
     </main>
   );

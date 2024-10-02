@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../core/Button/Button';
-import Input from '../core/Input/Input';
-import ProductList from '../ProductList/ProductList'; // Adjust the import according to your file structure
+import Button from '../common/Button/Button';
+import Input from '../common/Input/Input';
+import ProductList from '../features/ProductList/ProductList'; // Adjust the import according to your file structure
 import { Product } from '../../types/Product'; // Adjust the import for the Product interface
 
 const Sections: React.FC = () => {
