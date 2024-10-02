@@ -1,50 +1,52 @@
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Reem Kufi', sans-serif;
-    overflow-x: hidden;
-  }
-  
-  h2 {
-    color: rgb(97, 86, 86);
-    margin: 0;
-  }
-  
-  h3 {
-    font-weight: 700;
-    margin: 0.5rem 0 0;
-    background: linear-gradient(var(--secondary-color), var(--tertiary-color));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  h4 {
-    margin: 0;
-  }
-  
-  section {
-    padding: 50px 0;
-    border-bottom: 1px solid #ccc;
-  }
+@import './variables'; // Centralize variables
 
-  .text-gradient {
-    background: linear-gradient(var(--secondary-color), var(--tertiary-color));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Reem Kufi', sans-serif;
+  overflow-x: hidden;
+  background-color: var(--white-color);
+}
 
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-family: 'Reem Kufi', sans-serif;
-  }
+h2 {
+  color: var(--light-gray-color);
+  margin: 0;
+}
 
-  button {
-    font-family: 'Reem Kufi', sans-serif;
-  }
-  
+h3 {
+  font-weight: 700;
+  margin: 0.5rem 0 0;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h4 {
+  margin: 0;
+}
+
+section {
+  padding: 50px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.text-gradient {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+button {
+  font-family: 'Reem Kufi', sans-serif;
+}

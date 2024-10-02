@@ -1,12 +1,13 @@
-@import '../../../../scss/variables'; // Adjust the path if necessary
+@import '../../../../scss/variables';
 
 .banner {
   font-family: 'Readex Pro', sans-serif;
   aspect-ratio: 4 / 2;
   width: 100vw;
-  transition: margin-top 0.1s ease-out;
-  background: $background-gradient;
+  transition: var(--margin-transition);
+  background: var(--background-gradient);
   overflow: hidden;
+  user-select: none;
 
   .banner-image {
     position: relative;
@@ -35,7 +36,7 @@
     flex-direction: column;
     position: relative;
     left: -6vw;
-    text-shadow: 0.5vw 0.5vw 2vw #00000037;
+    text-shadow: 0.5vw 0.5vw 2vw var(--banner-shadow-color);
     transition: text-shadow 0.4s ease-out;
 
     &:hover {
@@ -45,7 +46,7 @@
     .paragraph {
       font-size: 1.5vw;
       font-weight: 400;
-      color: #ffffff79;
+      color: var(--banner-text-color);
       position: relative;
       top: -5vw;
       left: 11vw;
@@ -55,12 +56,12 @@
   .top {
     display: flex;
     height: min-content;
-    flex-wrap: wrap; // Allow wrapping on smaller screens
+    flex-wrap: wrap;
 
     &-start {
       padding-top: 1.5vw;
-      font-size: 3vw; // Responsive font size
-      color: $primary-color;
+      font-size: 3vw;
+      color: var(--primary-color);
       min-width: 10vw;
       max-width: 10vw;
       display: flex;
@@ -69,7 +70,7 @@
     }
 
     &-end {
-      color: $white-color;
+      color: #fff;
       flex: 0.8;
       display: flex;
       justify-content: start;
@@ -80,7 +81,7 @@
   .bottom {
     height: min-content;
     position: relative;
-    top: -3vw; // Responsive positioning
+    top: -3vw;
     display: flex;
 
     &-start {
@@ -89,34 +90,15 @@
       display: flex;
       justify-content: end;
       align-items: start;
-      color: $primary-color;
+      color: var(--primary-color);
     }
 
     &-end {
-      color: $primary-color;
+      color: var(--primary-color);
       flex: 0.8;
       display: flex;
       justify-content: start;
       align-items: start;
-    }
-  }
-
-  .text-section {
-    display: flex;
-    flex-wrap: wrap;
-    height: min-content;
-
-    .start {
-      font-size: 3vw;
-      flex: 0.2;
-      display: flex;
-      justify-content: end;
-    }
-
-    .end {
-      flex: 0.8;
-      display: flex;
-      justify-content: start;
     }
   }
 }

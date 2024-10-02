@@ -11,6 +11,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,12 +28,12 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
 
   return (
     <nav className="sticky-nav">
-      <div className="hamburger" onClick={() => { /* Toggle menu logic */ }}>
+      <div className="hamburger" onClick={() => {setIsMenuOpen(!isMenuOpen)}}>
         <div></div>
         <div></div>
         <div></div>
       </div>
-      <ul>
+      <ul className={isMenuOpen ? 'open' : ''}>
         <li>
           <NavLink
             to="/"

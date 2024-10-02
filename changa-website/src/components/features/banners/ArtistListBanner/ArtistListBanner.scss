@@ -1,60 +1,93 @@
-.artist-list-banner-header {
-    display: flex;
-    justify-content: start;
-    width: max-content;
-    align-items: center;
-    margin-top: 5rem;
-    padding-inline: 0.5rem;
-    height: min-content;
-    background-color: rgb(13, 13, 13);
+@import '../../../../scss/variables';
 
-    h2 {
-        color: white;
-        font-size: 1.2rem; // Adjust the font size as needed
-        font-weight: 200;
-        margin: 0;
+.artist-list-banner-header {
+  display: flex;
+  justify-content: start;
+  width: max-content;
+  align-items: center;
+  margin-top: 5rem;
+  padding-inline: 0.5rem;
+  height: min-content;
+  background-color: rgb(13, 13, 13);
+  overflow: hidden;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    z-index: 1;
+    margin: 0;
+    color: #ffffff; // White text color
+    position: relative; // Required for the pseudo-element
+
+    // Pseudo-element for glowing gradient shadow
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5; // Opacity of the gradient shadow
+      z-index: -1;
+      background: linear-gradient(270deg, #ff8800, #e52e71, #9b51e0, #2271bbc0); // Gradient colors
+      background-size: 400% 400%; // Size of the gradient to create the movement effect
+      filter: blur(15px); // Creates the glow effect by blurring the gradient
+      animation: gradientGlow 5s ease infinite; // Moving gradient animation
     }
+  }
 }
 
+// Keyframes for the moving gradient glow
+@keyframes gradientGlow {
+  0% {
+    background-position: 0% 50%; // Start of the gradient
+  }
+  50% {
+    background-position: 100% 50%; // Midway of the gradient
+  }
+  100% {
+    background-position: 0% 50%; // Looping back to the start
+  }
+}
 .artist-list-banner {
-    width: 100vw;
-    aspect-ratio: 6/2;
-    display: inline-grid;
-    gap: 0.5rem;
-    background-color: black;
-    grid-template-columns: repeat(5, 1fr);
+  width: 100vw;
+  aspect-ratio: 6/2;
+  display: inline-grid;
+  gap: 0.5rem;
+  background-color: var(--artist-banner-bg-color);
+  grid-template-columns: repeat(5, 1fr);
 
-    .artist-image-container {
-        position: relative; // Allows absolute positioning for the name overlay
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+  .artist-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: filter 0.3s ease; // Smooth transition for the blur effect
-        }
-
-        &:hover img {
-            filter: blur(5px); // Apply blur effect on hover
-        }
-
-        .artist-name {
-            position: absolute; // Position over the image
-            color: white;
-            font-size: 1.5rem; // Adjust the font size as needed
-            text-align: center;
-            transition: opacity 0.3s ease; // Smooth transition for visibility
-            opacity: 0; // Initially hidden
-        }
-
-        &:hover .artist-name {
-            opacity: 1; // Show name on hover
-        }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--image-hover-transition);
     }
+
+    &:hover img {
+      filter: blur(var(--artist-banner-hover-blur));
+    }
+
+    .artist-name {
+      position: absolute;
+      color: var(--artist-banner-text-color);
+      font-size: 1.5rem;
+      text-align: center;
+      transition: var(--fade-transition);
+      opacity: 0;
+    }
+
+    &:hover .artist-name {
+      opacity: 1;
+    }
+  }
 }

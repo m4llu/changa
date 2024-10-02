@@ -1,123 +1,118 @@
-.product-card { 
-    display: flex;
-    flex-direction: column; // Default to stack layout
-    background-color: #fff;
-    border-radius: 0.2em;
-    overflow: hidden;
-    border: 1px solid #000000; // Light border for separation
-    transition: box-shadow 0.3s ease;
-    height: 400px; // Fixed height for uniformity in stack layout
-    width: 100%;
+@import '../../../../scss/variables';
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--product-background);
+  border-radius: 0.2em;
+  overflow: hidden;
+  border: 1px solid;
+  border-color:  var(--product-border-color);
+  transition: var(--shadow-transition);
+  height: 400px;
+  width: 100%;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 8px 15px var(--product-hover-shadow);
+  }
+
+  &__image-container {
     position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
 
-    &:hover {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1em;
+
+    h3,
+    h4 {
+      margin: 0;
+      font-weight: 600;
+      color: var(--product-card-text-color);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    // Image Container
+    p {
+      margin: 0;
+      line-height: 1.4;
+      color: var(--product-description-color);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .product-card__release-year {
+      font-size: 0.9rem;
+      color: var(--product-subtle-text-color);
+      margin-top: 4px;
+    }
+  }
+
+  &__bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    &__button {
+      padding: 12px 0;
+      background-color: var(--white-color);
+      color: var(--product-background);
+      border-color: var(--product-border-color);
+      border: none;
+      border-radius: 0.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      width: 100%;
+
+      &:hover {
+        background-color: var(--product-card-text-color);
+      }
+    }
+  }
+
+  &.row {
+    flex-direction: row;
+    max-height: 350px;
+
     &__image-container {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 1/1;
-        overflow: hidden;
+      height: 100%;
+      flex-shrink: 0;
 
-        img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; // Cover image within container
-        }
+      img {
+        border-radius: 0.2em 0 0 0.2em;
+      }
     }
 
-    // Info Section
     &__info {
-        padding: 16px;
-        display: flex;
-        flex-direction: column; // Default stack direction
-        flex-grow: 1; // Grow to fill space
-        gap: 1em;
-
-        h3, h4 {
-            margin: 0;
-            font-weight: 600; // Make headings bold
-            color: #333; // Darker color for better readability
-            overflow: hidden; // Prevent overflow
-            text-overflow: ellipsis; // Show ellipsis if text overflows
-            white-space: nowrap; // Prevent wrapping
-        }
-
-        p {
-            margin: 0;
-            line-height: 1.4; // Improved line spacing
-            color: #666; // Subtle color for descriptions
-            overflow: hidden; // Prevent overflow
-            text-overflow: ellipsis; // Show ellipsis if text overflows
-            white-space: nowrap; // Prevent wrapping
-        }
-
-        // Release Year
-        .product-card__release-year {
-            font-size: 0.9rem;
-            color: #888; // Subtle color for release year
-            margin-top: 4px; // Slightly spaced from price
-        }
+      padding: 12px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     &__bottom-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: end; // Center vertically
-
-        &__button {
-            padding: 12px 0; // Padding for better touch target
-            background-color: #000; // Black background
-            color: #fff; // White text
-            border: none;
-            border-radius: 0.2em; // Rounded bottom corners
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1rem; // Standard button size
-            width: 100%; // Full width for button
-
-            &:hover {
-                background-color: #333; // Darker shade on hover
-            }
-        }
+      align-items: flex-end;
+      margin-top: auto;
     }
-
-    // Row Layout Styling
-    &.row {
-        flex-direction: row; // Set to row layout
-        max-height: 350px;
-
-        &__image-container {
-            height: 100%;
-            flex-shrink: 0; // Prevent image from shrinking
-            padding-top: 0; // Remove aspect ratio padding
-
-            img {
-                border-radius: 0.2em 0 0 0.2em; // Rounded left corners
-                position: absolute;
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        &__info {
-            padding: 12px; // Adjust padding for row layout
-            flex-grow: 1; // Allow info section to grow and fill space
-            display: flex; 
-            flex-direction: column; // Stack content vertically
-            justify-content: space-between; // Space items evenly
-        }
-
-        &__bottom-container {
-            align-items: flex-end; // Align items to the bottom
-            margin-top: auto; // Push bottom container to the end
-        }
-    }
-        
-    
+  }
 }

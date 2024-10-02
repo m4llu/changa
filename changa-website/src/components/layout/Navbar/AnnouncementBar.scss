@@ -1,7 +1,7 @@
 @import '../../../scss/variables';
-
+//AnnouncementBar.scss
 .announcement-bar {
-  background: linear-gradient(120deg, $secondary-color, $tertiary-color);
+  background: linear-gradient(120deg, var(--secondary-color), var(--tertiary-color));
   position: fixed;
   top: 0;
   left: 0;
@@ -9,6 +9,7 @@
   height: min-content;
   z-index: 9999;
   overflow: hidden; /* Hide the overflow to make the text reappear from the right side */
+
 
   .scrolling-text-wrapper {
     display: flex; /* Use flexbox for alignment */
@@ -18,7 +19,7 @@
 
   .scrolling-text-wrapper span {
     display: inline-block; /* Make each part an inline block */
-    color: $white-color;
+    color: #fff;
     font-size: 1.2rem;
     margin: 0.2rem 0; /* Adjust vertical margins as needed */
     padding: 0 10rem; /* Add horizontal gaps between segments, adjust as needed */

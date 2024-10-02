@@ -1,19 +1,18 @@
-@import '../../../scss/variables'; // Adjust path if necessary
+@import '../../../scss/variables'; // Centralize import for variables
 
-// Base styles for the sticky navigation
 .sticky-nav {
   position: sticky;
   top: 2rem;
-  background-color: $white-color;
+  background-color: var(--white-color);
   padding: 1.5rem 0;
   z-index: 1000;
   display: flex;
   justify-content: end;
   align-items: center;
-  transition: $transition;
+  transition: var(--transition);
 
-  // Logo container styles
   .logo-container {
+    pointer-events: none;
     display: flex;
     position: absolute;
     width: 100%;
@@ -22,31 +21,25 @@
     flex-direction: column;
     justify-content: center;
     transform: translateY(50%);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     align-items: start;
 
     .logo {
       height: 6rem;
-      transition: all 0.3s ease-in-out;
+      transition: var(--hover-transition);
       transform: translateX(calc(50vw - 50%));
     }
 
     .logo-phrase {
       display: block;
-      transition: all 0;
       text-align: center;
-      font-size: 2vw;
-      transition: all 0.3s ease-in-out;
-      transform: translateX(33vw);
-
-      @media only screen and (max-width: 968px) {
-        transform: translateX(25vw);
-        font-size: 3vw;
-      }
+      font-size: 2rem;
+      color: var(--text-color);
+      transform: translateX(calc(-16rem + 50vw));
+      transition: all 0.3s ease-in;
     }
   }
 
-  // Default styles for the navigation list
   ul {
     list-style: none;
     display: flex;
@@ -55,21 +48,27 @@
     padding: 0;
     flex: 1;
 
-    // List item styles
     li {
       margin: 0 1rem;
       padding-inline: 4vw;
-      transition: all 0.3s ease-out;
       padding-block: 0.5rem;
+      transition: var(--hover-transition);
+
+      .user-name {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--black-color);
+        cursor: pointer;
+      }
 
       a {
         text-decoration: none;
-        color: $text-color;
+        color: var(--text-color);
         font-size: 1.2rem;
         font-weight: bold;
 
         &.selected-page {
-          background: linear-gradient($secondary-color, $tertiary-color);
+          background: var(--brand-gradient);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -83,27 +82,25 @@
     }
   }
 
-  // Hamburger menu styles
   .hamburger {
-    display: none; // Hidden by default
+    display: none;
     flex-direction: column;
     cursor: pointer;
     padding: 0 1rem;
-    transition: $transition;
+    transition: var(--transition);
 
     div {
       width: 25px;
       height: 3px;
-      background-color: $text-color;
+      background-color: var(--text-color);
       margin: 4px 0;
-      transition: $transition;
+      transition: var(--transition);
     }
   }
 
-  // Styles applied when scrolled and shrink class is added
   &.shrink {
     padding: 1rem 0;
-    
+
     ul {
       justify-content: end;
     }
@@ -113,41 +110,34 @@
     }
 
     @media only screen and (max-width: 728px) {
-      // Hide the horizontal nav when .shrink is applied and screen is less than 728px
       ul {
-        display: none; // Hide horizontal nav
+        display: none;
       }
 
-      // Show hamburger menu when .shrink is applied and screen is less than 728px
       .hamburger {
         display: flex;
       }
     }
 
-    // Show the vertical navigation list when hamburger menu is open
     ul.open {
       display: flex;
       flex-direction: column;
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: $white-color;
+      background-color: var(--white-color);
       width: 40%;
       text-align: center;
-      z-index: 999; // Ensure it overlaps other content
+      z-index: 999;
 
       li {
         padding-block: 1rem;
       }
     }
 
-    // Adjust logo container and logo size when .shrink is applied
     .logo-container {
       height: 3rem;
       padding: 0 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: start;
       transform: translateY(0);
 
       .logo {
@@ -163,20 +153,19 @@
   }
 }
 
-// Media query for screens less than 728px
 @media only screen and (max-width: 728px) {
   .sticky-nav {
     ul {
-      display: flex; // Hide horizontal nav by default on small screens
+      display: flex;
     }
 
-    // Show the vertical navigation list when hamburger menu is open
     ul.open {
       display: flex;
     }
 
     .logo-container {
       height: 15rem;
+
       .logo {
         height: 4rem;
       }
@@ -189,7 +178,6 @@
   }
 }
 
-// Media query for screens less than 450px
 @media only screen and (max-width: 450px) {
   .sticky-nav {
     ul li {
@@ -200,14 +188,15 @@
     ul li a {
       font-size: 1rem;
     }
-  }
-  .sticky-nav {
+
     .logo-container {
       height: 10rem;
+
       .logo {
         height: 3rem;
       }
-      .logo-phrase{
+
+      .logo-phrase {
         font-size: 1rem;
       }
     }
