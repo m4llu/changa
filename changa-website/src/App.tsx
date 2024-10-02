@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import { AuthProvider } from './context/AuthContext';
+import DevPage from './components/dev/ProductForm/DevPage';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -80,6 +81,7 @@ const App: React.FC = () => {
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/discover" element={<Discover />} />
+            <Route path="/dev" element={<DevPage/>} />
 
             {/* Protected Route for Dashboard (Admin only) */}
             <Route
