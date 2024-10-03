@@ -13,7 +13,7 @@ const CollectionBanner: React.FC = () => {
 
     // Function to update the margin-top value
     const updateMarginTop = () => {
-      setMarginTop(logoContainer.clientHeight + 25);
+      setMarginTop(logoContainer.clientHeight);
     };
 
     // Initialize marginTop on mount

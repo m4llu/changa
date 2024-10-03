@@ -52,7 +52,7 @@ const useStickyNav = (alwaysShrink: boolean = false) => {
     };
 
     // Attach the throttled scroll event handler
-    const throttledHandleScroll = throttle(handleScroll, 100); // Adjust the throttle limit as needed
+    const throttledHandleScroll = throttle(handleScroll, 10); // Adjust the throttle limit as needed
 
     window.addEventListener('scroll', throttledHandleScroll);
     return () => window.removeEventListener('scroll', throttledHandleScroll);

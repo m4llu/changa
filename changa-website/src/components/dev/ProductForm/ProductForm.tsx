@@ -103,7 +103,7 @@ const ProductForm: React.FC = () => {
 
     // Automatically submit the selected album to the database
     try {
-      const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {
+      const response = await fetch(`${import.meta.env.VITE_LOCAL_DEBUG_API_URL}/Products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
         </li>
         <li>
           {isLoggedIn ? (
-            <span onClick={onLogout} className="user-name">{userName}</span>
+            <span onClick={onLogout} className="user-name">@{userName}</span>
           ) : (
             <a onClick={handleSignInClick} className="login-link">Login</a>
           )}
