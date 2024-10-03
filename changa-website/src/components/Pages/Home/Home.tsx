@@ -4,12 +4,13 @@ import ProductList from '../../features/ProductList/ProductList';
 import ArtistListBanner from '../../features/banners/ArtistListBanner/ArtistListBanner';
 import { Product } from '../../../types/Product';
 import HomeProductSection from './HomeProductSection/HomeProductSection';
+import useStickyNav from '../../../hooks/useStickyNav';
 
 const Home: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-
+    useStickyNav(false);
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);

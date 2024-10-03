@@ -18,7 +18,7 @@
   $button-box-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.2);
   
   // Generic button styling
-  .button {
+  .button, .cart-button {
     padding: $button-padding;
     border: 0.1em solid transparent;
     border-radius: $button-border-radius;

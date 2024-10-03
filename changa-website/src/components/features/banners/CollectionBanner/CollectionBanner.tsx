@@ -50,7 +50,7 @@ const CollectionBanner: React.FC = () => {
         <div className="banner-text-container" onClick={scrollToNextSection}>
           <div className="top">
             <div className="top-start">THE</div>
-            <div className="top-end">KANYE EAST</div>
+            <div className="top-end">KANYE WEST</div>
           </div>
           <div className="bottom">
             <div className="bottom-start"></div>

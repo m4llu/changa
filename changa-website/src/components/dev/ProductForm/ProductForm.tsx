@@ -3,8 +3,9 @@ import { Product, DiscType, Category } from '../../../types/Product'; // Adjust 
 import './ProductForm.scss';
 
 const ProductForm: React.FC = () => {
-  const APIKEY = useRef(import.meta.env.VITE_API_KEY);
-  const LASTFM_API_KEY = useRef(import.meta.env.VITE_LASTFM_API_KEY); // Last.fm API Key
+  const APIKEY = useRef(import.meta.env.VITE_API_KEY); // Your local API key
+  const DISCogs_KEY = useRef(import.meta.env.VITE_DISCOGS_KEY); // Your Discogs consumer key
+  const DISCogs_SECRET = useRef(import.meta.env.VITE_DISCOGS_SECRET); // Your Discogs consumer secret
   const [formData, setFormData] = useState<Product>({
     id: undefined,
     created: undefined,
@@ -46,10 +47,10 @@ const ProductForm: React.FC = () => {
         }
 
         const data = await response.json();
-        const albumNames = data.map((album: any) => album.album.toLowerCase());
+        const albumNames = data.map((album: Product) => album.album.toLowerCase());
         setExistingAlbums(albumNames);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : 'An unknown error occurred');
       }
     };
 
@@ -60,50 +61,90 @@ const ProductForm: React.FC = () => {
     setSearchQuery(e.target.value);
   };
 
-  const searchLastFM = async () => {
+  // Fetch album details from Discogs API (genre, release year, record label)
+  const fetchDiscogsData = async (albumId: string) => {
+    try {
+      const response = await fetch(`https://api.discogs.com/releases/${albumId}`, {
+        headers: {
+          Authorization: `Discogs token=${DISCogs_KEY.current}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch from Discogs');
+      }
+
+      const data = await response.json();
+      const recordLabel = data.label[0]; // Get the first label
+      const releaseYear = new Date(data.released).getFullYear(); // Extract year from the release date
+      const genre = data.genre.join(', '); // Join multiple genres if any
+
+      return { recordLabel, releaseYear, genre };
+    } catch (error) {
+      console.error('Error fetching Discogs data:', error);
+      return null;
+    }
+  };
+
+  // Use MusicBrainz API to search for albums
+  const searchMusicBrainz = async () => {
     setLoading(true);
     setError(null);
 
     try {
       const response = await fetch(
-        `https://ws.audioscrobbler.com/2.0/?method=album.search&album=${searchQuery}&api_key=${LASTFM_API_KEY.current}&format=json`
+        `https://musicbrainz.org/ws/2/release-group/?query=${searchQuery}&type=album&fmt=json`
       );
       if (!response.ok) {
-        throw new Error('Failed to fetch from Last.fm');
+        throw new Error('Failed to fetch from MusicBrainz');
       }
 
       const data = await response.json();
-      const albums = data.results.albummatches.album;
+      console.log('MusicBrainz data:', data);
+      const albums = data['release-groups'];
 
       // Filter out albums that already exist in the database
       const filteredAlbums = albums.filter(
-        (album: any) => !existingAlbums.includes(album.name.toLowerCase())
+        (album: any) => !existingAlbums.includes(album.title.toLowerCase())
       );
 
       setSearchResults(filteredAlbums);
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setLoading(false);
     }
   };
 
+  // Get album art from Cover Art Archive (CAA) and handle album selection
   const handleSelectAlbum = async (album: any) => {
-    const imageUrl = album.image?.find((img: any) => img.size === 'large')?.['#text'] || ''; // Get the large image
+    const musicBrainzID = album.id;
 
-    const newAlbum = {
-      ...formData,
-      album: album.name,
-      artist: album.artist,
-      cover: imageUrl,
-      description: album.url,
-    };
-
-    setFormData(newAlbum);
-
-    // Automatically submit the selected album to the database
     try {
-      const response = await fetch(`${import.meta.env.VITE_LOCAL_DEBUG_API_URL}/Products`, {
+      // Get cover image from Cover Art Archive
+      const coverResponse = await fetch(
+        `https://coverartarchive.org/release-group/${musicBrainzID}`
+      );
+      const coverData = await coverResponse.json();
+      const coverImageUrl = coverData.images?.[0]?.image || '';
+
+      // Fetch data from Discogs (Label, Release Year, Genre)
+      const discogsData = await fetchDiscogsData(musicBrainzID);
+
+      const newAlbum = {
+        ...formData,
+        album: album.title,
+        artist: album['artist-credit'][0].name,
+        cover: coverImageUrl,
+        description: album.disambiguation || 'No description available.',
+        recordLabel: discogsData?.recordLabel || 'Unknown Label',
+        releaseYear: discogsData?.releaseYear || 2024,
+        genre: discogsData?.genre || 'Unknown',
+      };
+
+      setFormData(newAlbum);
+
+      // Automatically submit the selected album to the database
+      const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +172,7 @@ const ProductForm: React.FC = () => {
         quantity: 50,
         discType: DiscType.CD,
         category: Category.Rock,
-        recordLabel: 'Skibidi Records',
+        recordLabel: '',
         releaseYear: 2024,
         description: 'No description available yet.',
         cover: '',
@@ -141,8 +182,8 @@ const ProductForm: React.FC = () => {
       });
 
       // Update the existing albums list to reflect the newly added album
-      setExistingAlbums([...existingAlbums, album.name.toLowerCase()]);
-      setSearchResults(searchResults.filter((item) => item.name !== album.name));
+      setExistingAlbums([...existingAlbums, album.title.toLowerCase()]);
+      setSearchResults(searchResults.filter((item) => item.id !== album.id));
     } catch (error) {
       console.error('Error:', error);
     }
@@ -161,7 +202,6 @@ const ProductForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('formData:', formData)
 
     try {
       const response = await fetch(`${import.meta.env.VITE_LOCAL_API_URL}/Products`, {
@@ -208,24 +248,23 @@ const ProductForm: React.FC = () => {
     <div className="product-form-container">
       <h2>Add a New Product</h2>
 
-      <div className="lastfm-search-container">
+      <div className="musicbrainz-search-container">
         <input
           type="text"
-          placeholder="Search Last.fm for albums..."
+          placeholder="Search MusicBrainz for albums..."
           value={searchQuery}
           onChange={handleSearchChange}
         />
-        <button onClick={searchLastFM}>Search</button>
+        <button onClick={searchMusicBrainz}>Search</button>
       </div>
 
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
 
-      <ul className="lastfm-search-results">
+      <ul className="musicbrainz-search-results">
         {searchResults.map((album) => (
-          <li key={album.url} onClick={() => handleSelectAlbum(album)}>
-            <img src={album.image?.find((img: any) => img.size === 'small')?.['#text']} alt={album.name} />
-            <p>{album.name} by {album.artist}</p>
+          <li key={album.id} onClick={() => handleSelectAlbum(album)}>
+            <p>{album.title} by {album['artist-credit'][0].name}</p>
           </li>
         ))}
       </ul>

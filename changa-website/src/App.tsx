@@ -13,41 +13,16 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import { AuthProvider } from './context/AuthContext';
 import DevPage from './components/dev/ProductForm/DevPage';
+import Adversitement from './components/features/Adversitement/Adversitement';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState('home');
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem('isLoggedIn') === 'true';
   });
   const [user, setUser] = useState<User | null>(null); // Initialize user as null
 
-  const alwaysShrink = currentPage !== 'home';
-  useStickyNav(alwaysShrink);
-
-  useEffect(() => {
-    const stickyNav = document.querySelector('.sticky-nav');
-    const banner = document.querySelector('.banner');
-
     window.scrollTo(0, 0);
 
-    if (currentPage === 'home') {
-      stickyNav?.classList.remove('shrink');
-      banner?.classList.remove('low');
-    } else {
-      stickyNav?.classList.add('shrink');
-      banner?.classList.add('low');
-    }
-
-    if (currentPage !== 'home') {
-      document.body.style.overflowY = 'hidden';
-    } else {
-      document.body.style.overflowY = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflowY = 'auto';
-    };
-  }, [currentPage]);
 
   const handleLogin = (userData: User) => {
     setIsLoggedIn(true);
@@ -67,6 +42,7 @@ const App: React.FC = () => {
     <AuthProvider>
     <Router>
       <div className="App">
+        <Adversitement />
         <AnnouncementBar />
         <Navbar 
           isLoggedIn={isLoggedIn} // Pass isLoggedIn prop

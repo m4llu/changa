@@ -1,8 +1,10 @@
 // src/components/Pages/Discover/Discover.tsx
 import React from 'react';
 import './AlbumPage.scss';
+import useStickyNav from '../../../hooks/useStickyNav';
 
 const AlbumPage: React.FC = () => {
+  useStickyNav(true);
   return (
     <main className="album-page">
       <aside className="category-list" aria-label="Album Categories">

@@ -27,6 +27,7 @@ const ShoppingCartButton: React.FC<ShoppingCartButtonProps> = ({
         <Button 
             variant={variant} 
             size={size} 
+            cartButton={true}
             onClick={() => onClick(product.id)} 
         >
             <FaShoppingCart style={{ marginRight: '0.5em' }} /> {/* Shopping cart icon */}
