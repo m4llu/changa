@@ -1,13 +1,18 @@
+// Adversitement.tsx
 import React, { useState, useEffect } from 'react';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import './Adversitement.scss';
 import Button from '../../common/Button/Button';
+import Wheel from './SpinWheel';  // Import Wheel component
+import DarkModePrompt from './DarkModePrompt';  // Import Dark Mode Prompt
 
 const Adversitement: React.FC = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(true);
+  const [showDarkModePrompt, setShowDarkModePrompt] = useState(false);
 
   const closePopup = () => {
     setIsPopupVisible(false);
+    setShowDarkModePrompt(true);  // Show dark mode prompt after popup closes
   };
 
   useEffect(() => {
@@ -22,26 +27,19 @@ const Adversitement: React.FC = () => {
     return () => enableBodyScroll(targetElement);
   }, [isPopupVisible]);
 
-  return isPopupVisible ? (
-    <div className="adversitement-container">
-      <div className="popup">
-        <div className="popup-content">
-          <h2 className='changa'>Spin & Win</h2>
-          <div className="wheel">
-            {/* Placeholder for the spin & win wheel */}
-            <p>Wheel goes here</p>
+  return (
+    <>
+      {isPopupVisible && (
+        <div className="adversitement-container">
+          <div className="popup">
+            <div className="popup-content">
+              <DarkModePrompt onClose={closePopup}/>
+            </div>
           </div>
-          <Button variant='tertiary' fullWidth={true} onClick={closePopup}>
-            Spin Now
-          </Button>
         </div>
-      </div>
-      <div className="content">
-        {/* Your main content goes here */}
-        <p>Main content of the page</p>
-      </div>
-    </div>
-  ) : null;
+      )}
+    </>
+  );
 };
 
 export default Adversitement;

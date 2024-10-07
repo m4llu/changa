@@ -60,8 +60,7 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background:  linear-gradient(0deg, rgba(255, 81, 0, 0.521) 0%, rgba(207,43,126, 0.521) 19%, rgba(255,119,0, 0.521) 33%, rgba(210,53,130, 0.521) 54%, rgba(226,121,40, 0.521) 77%, rgba(255,0,151, 0.521) 100%);
-
+background-color: #fff;
   &:hover {
     background: linear-gradient(0deg, rgba(255,81,0,1) 0%, rgba(207,43,126,1) 19%, rgba(255,119,0,1) 33%, rgba(210,53,130,1) 54%, rgba(226,121,40,1) 77%, rgba(255,0,151,1) 100%);
   }
@@ -72,6 +71,3 @@ button {
   box-shadow: 0px 0px 0px 100000vh black;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  box-shadow: 0px 0px 0px 100000vh rgb(22, 22, 22);
-}

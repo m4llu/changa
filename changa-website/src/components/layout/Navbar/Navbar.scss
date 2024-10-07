@@ -169,6 +169,11 @@
       .logo {
         height: 4rem;
       }
+      .logo-phrase {
+        font-size: 1.5rem;
+        transform: translateX(calc(-10.5rem + 50vw));
+
+      }
     }
 
     ul li {
@@ -198,6 +203,7 @@
 
       .logo-phrase {
         font-size: 1rem;
+        transform: translateX(calc(-8rem + 50vw));
       }
     }
   }

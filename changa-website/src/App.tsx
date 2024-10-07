@@ -23,6 +23,34 @@ const App: React.FC = () => {
 
     window.scrollTo(0, 0);
 
+    const setColorSchemeMetaTag = (scheme: 'dark' | 'light') => {
+      let metaTag = document.querySelector('meta[name="prefers-color-scheme"]');
+      
+      if (!metaTag) {
+        metaTag = document.createElement('meta');
+        metaTag.setAttribute('name', 'prefers-color-scheme');
+        document.head.appendChild(metaTag);
+      }
+      
+      metaTag.setAttribute('content', scheme);
+    };
+  
+    useEffect(() => {
+      // Load theme preference from localStorage
+      const storedTheme = localStorage.getItem('theme');
+      
+      if (storedTheme === 'dark') {
+        setColorSchemeMetaTag('dark');
+        document.body.classList.add('dark-mode');
+        document.body.classList.remove('light-mode');
+      } else {
+        setColorSchemeMetaTag('light');
+        document.body.classList.add('light-mode');
+        document.body.classList.remove('dark-mode');
+      }
+    }, []);
+  
+
 
   const handleLogin = (userData: User) => {
     setIsLoggedIn(true);
