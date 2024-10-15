@@ -42,10 +42,9 @@
 --artist-banner-text-color: white;
 --artist-banner-hover-blur: 5px;
 }
-/* Dark Mode Variables */
+/* Dark Mode Variables 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark mode backgrounds and text colors */
     --white-color: #080808;
     --black-color: #f1f1f1;
     --gray-color: #555555;
@@ -54,8 +53,6 @@
     --dark-background: #121212;
     --footer-text-color: #cccccc;
     --border-color: #444444;
-
-    /* Dark mode product colors */
     --product-background: #050505;
     --product-border-color: #ffffff;
     --product-card-text-color: #e0e0e0;
@@ -64,15 +61,12 @@
     --product-hover-shadow: rgba(255, 255, 255, 0.1);
     --product-header-footer-background: linear-gradient(180deg, #2a2a2a 0%, #3a3a3a 100%);
     --product-footer-shadow: linear-gradient(180deg, #08080800 0%, #08080800 100%);
-
-    /* Dark mode banner colors */
     --banner-shadow-color: #00000099;
     --banner-text-color: #ffffff;
 
-    /* Dark mode artist list colors */
     --artist-banner-bg-color: #121212;
     --artist-banner-text-color: #f5f5f5;
   }
 }
-
+/*
 /* Use the variables throughout your SCSS for both light and dark mode */

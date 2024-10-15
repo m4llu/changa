@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           'X-API-KEY': `${import.meta.env.VITE_API_KEY}`,
         },
         body: JSON.stringify({
-          name: email, // Use email field (assuming API expects 'email')
+          name: email, 
           password: password,
         }),
       });

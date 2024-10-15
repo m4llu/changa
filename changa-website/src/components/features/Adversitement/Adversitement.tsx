@@ -4,15 +4,13 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import './Adversitement.scss';
 import Button from '../../common/Button/Button';
 import Wheel from './SpinWheel';  // Import Wheel component
-import DarkModePrompt from './DarkModePrompt';  // Import Dark Mode Prompt
+
 
 const Adversitement: React.FC = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(true);
-  const [showDarkModePrompt, setShowDarkModePrompt] = useState(false);
 
   const closePopup = () => {
     setIsPopupVisible(false);
-    setShowDarkModePrompt(true);  // Show dark mode prompt after popup closes
   };
 
   useEffect(() => {
@@ -33,7 +31,10 @@ const Adversitement: React.FC = () => {
         <div className="adversitement-container">
           <div className="popup">
             <div className="popup-content">
-              <DarkModePrompt onClose={closePopup}/>
+              <Wheel/>
+              <Button variant="tertiary" fullWidth={true} onClick={closePopup}>
+                Close
+                </Button>
             </div>
           </div>
         </div>
