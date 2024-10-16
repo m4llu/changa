@@ -42,27 +42,105 @@ The application will be available at `http://localhost:5173`.
 The project structure is organized as follows:
 
 ```
-changa-website/
-├── src/
-│   ├── components/
-│   │   ├── Common/
-│   │   │   └── Button.tsx
-│   │   ├── Pages/
-│   │   │   ├── Home/
-│   │   │   │   └── HomeProductSection.tsx
-│   │   │   ├── Discover/
-│   │   │   │   └── Dashboard.tsx
-│   │   └── Navbar.tsx
-│   ├── context/
-│   │   └── AuthContext.tsx
-│   ├── hooks/
-│   │   └── useStickyNav.ts
-│   ├── App.tsx
-│   └── index.tsx
-├── public/
-│   └── index.html
-├── package.json
-└── README.md
+└── 📁changa-website
+    └── 📁public
+        └── vite.svg
+    └── 📁src
+        └── 📁assets
+            └── 📁icons
+                └── icons
+            └── 📁images
+                └── images
+        └── 📁components
+            └── 📁common
+                └── 📁Button
+                    └── Button.scss
+                    └── Button.tsx
+                    └── CartButton.scss
+                    └── CartButton.tsx
+                └── 📁Input
+                    └── Input.scss
+                    └── Input.tsx
+            └── 📁dev
+                └── 📁ProductForm
+                    └── DevPage.tsx
+                    └── ProductForm.scss
+                    └── ProductForm.tsx
+            └── 📁features
+                └── 📁Adversitement
+                    └── Adversitement.scss
+                    └── Adversitement.tsx
+                    └── DarkModePrompt.tsx
+                    └── SpinWheel.tsx
+                └── 📁banners
+                    └── 📁ArtistListBanner
+                        └── ArtistListBanner.scss
+                        └── ArtistListBanner.tsx
+                    └── 📁CollectionBanner
+                        └── BannerImage.svg
+                        └── CollectionBanner.scss
+                        └── CollectionBanner.tsx
+                └── 📁ProductList
+                    └── 📁ProductCard
+                        └── ProductCard.scss
+                        └── ProductCard.tsx
+                    └── ProductList.scss
+                    └── ProductList.tsx
+            └── 📁layout
+                └── 📁Footer
+                    └── Footer.scss
+                    └── Footer.tsx
+                └── 📁Navbar
+                    └── AnnouncementBar.scss
+                    └── AnnouncementBar.tsx
+                    └── Navbar.scss
+                    └── Navbar.tsx
+            └── 📁pages
+                └── 📁About
+                    └── AboutPage.scss
+                    └── AboutPage.tsx
+                └── 📁Dashboard
+                    └── Dashboard.tsx
+                └── 📁Find
+                    └── AlbumPage.scss
+                    └── AlbumPage.tsx
+                └── 📁Home
+                    └── 📁HomeProductSection
+                        └── HomeProductSection.scss
+                        └── HomeProductSection.tsx
+                    └── Home.tsx
+                └── 📁Login
+                    └── Login.scss
+                    └── Login.tsx
+            └── 📁Sections
+                └── Sections.tsx
+            └── ProtectedRoute.tsx
+        └── 📁context
+            └── AuthContext.tsx
+        └── 📁hooks
+            └── useStickyNav.tsx
+        └── 📁scss
+            └── _variables.scss
+            └── main.scss
+        └── 📁types
+            └── Product.ts
+            └── User.ts
+        └── App.tsx
+        └── index.css
+        └── main.tsx
+        └── vite-env.d.ts
+    └── .env
+    └── .gitignore
+    └── eslint.config.js
+    └── example.env
+    └── index.html
+    └── package-lock.json
+    └── package.json
+    └── tsconfig.app.json
+    └── tsconfig.json
+    └── tsconfig.node.json
+    └── vite.config.ts
+    └── YE.ico
 ```
 
 ## Components Overview
