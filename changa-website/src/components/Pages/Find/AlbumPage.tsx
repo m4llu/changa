@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AlbumPage.scss';
 import useStickyNav from '../../../hooks/useStickyNav';
-import ProductList from '../../features/ProductList/ProductList'; // Import the ProductList component
+import ProductList from '../../features/ProductList/ProductList';
 import { Product } from '../../../types/Product';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';

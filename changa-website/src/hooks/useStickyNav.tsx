@@ -7,7 +7,6 @@ const useStickyNav = (alwaysShrink: boolean = false) => {
 
     if (!stickyNav) return;
 
-    // Apply the shrink class immediately if alwaysShrink is true
     if (alwaysShrink) {
       stickyNav.classList.add('shrink');
       banner?.classList.add('low');
@@ -30,7 +29,6 @@ const useStickyNav = (alwaysShrink: boolean = false) => {
       }
     };
 
-    // Throttle function to limit the frequency of scroll handler execution
     const throttle = (func: () => void, limit: number) => {
       let lastFunc: ReturnType<typeof setTimeout> | null = null;
       let lastRan: number | undefined = undefined;
@@ -51,8 +49,7 @@ const useStickyNav = (alwaysShrink: boolean = false) => {
       };
     };
 
-    // Attach the throttled scroll event handler
-    const throttledHandleScroll = throttle(handleScroll, 10); // Adjust the throttle limit as needed
+    const throttledHandleScroll = throttle(handleScroll, 10);
 
     window.addEventListener('scroll', throttledHandleScroll);
     return () => window.removeEventListener('scroll', throttledHandleScroll);

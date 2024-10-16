@@ -4,7 +4,7 @@ import Navbar from './components/layout/Navbar/Navbar';
 import useStickyNav from './hooks/useStickyNav';
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
-import Discover from './components/pages/Discover/AlbumPage';
+import Discover from './components/pages/Find/AlbumPage';
 import AnnouncementBar from './components/layout/Navbar/AnnouncementBar';
 import Footer from './components/layout/Footer/Footer';
 import { User } from './types/User';
@@ -14,6 +14,8 @@ import Dashboard from './components/pages/Dashboard/Dashboard';
 import { AuthProvider } from './context/AuthContext';
 import DevPage from './components/dev/ProductForm/DevPage';
 import Adversitement from './components/features/Adversitement/Adversitement';
+import AlbumPage from './components/pages/Find/AlbumPage';
+import AboutPage from './components/pages/About/AboutPage';
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -36,7 +38,6 @@ const App: React.FC = () => {
     };
   
     useEffect(() => {
-      // Load theme preference from localStorage
       const storedTheme = localStorage.getItem('theme');
       
       if (storedTheme === 'dark') {
@@ -50,20 +51,18 @@ const App: React.FC = () => {
       }
     }, []);
   
-
-
   const handleLogin = (userData: User) => {
     setIsLoggedIn(true);
-    setUser(userData); // Set the entire user object
+    setUser(userData);
     localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('user', JSON.stringify(userData)); // Store the user object in local storage
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUser(null); // Reset the user object
+    setUser(null);
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('user'); // Remove user from local storage
+    localStorage.removeItem('user'); 
   };
 
   return (
@@ -73,34 +72,35 @@ const App: React.FC = () => {
         <Adversitement />
         <AnnouncementBar />
         <Navbar 
-          isLoggedIn={isLoggedIn} // Pass isLoggedIn prop
-          onLogout={handleLogout} // Pass logout function
+          isLoggedIn={isLoggedIn}
+          onLogout={handleLogout}
         />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/discover" element={<Discover />} />
+            <Route path="/find" element={<AlbumPage />} />
+            <Route path='/about' element={<AboutPage />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
-            <Route path="/discover" element={<Discover />} />
+            <Route path="/find" element={<AlbumPage />} />
+            <Route path='/about' element={<AboutPage />} />
             <Route path="/dev" element={<DevPage/>} />
 
-            {/* Protected Route for Dashboard (Admin only) */}
             <Route
               path="/dashboard"
               element={
-            <ProtectedRoute
-              redirectPath="/dashboard"
-              isAllowed={
+              <ProtectedRoute
+                redirectPath="/"
+                isAllowed={
                 !!user && user.role === '1'
+                }
+              >
+                <Dashboard />
+              </ProtectedRoute>
               }
-            >
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />       
+            />
             {/* Add more routes for other protected pages here */}
           </Routes>
         </main>

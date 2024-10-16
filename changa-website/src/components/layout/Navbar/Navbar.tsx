@@ -44,7 +44,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
         </li>
         <li>
           <NavLink
-            to="/discover"
+            to="/find"
             className={({ isActive }) => (isActive ? 'selected-page' : '')}
           >
             Find

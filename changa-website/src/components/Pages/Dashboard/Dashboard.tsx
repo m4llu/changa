@@ -1,4 +1,3 @@
-// src/components/Pages/Discover/Discover.tsx
 import React from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import useStickyNav from '../../../hooks/useStickyNav';

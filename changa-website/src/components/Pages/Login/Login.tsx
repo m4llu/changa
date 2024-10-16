@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './Login.scss';
-import { User } from '../../../types/User'; // Ensure the User type includes the token property if necessary
+import { User } from '../../../types/User'; 
+import Button from '../../common/Button/Button';
 
 interface LoginProps {
-  onLogin: (user: User) => void; // Callback function to pass the user object after successful login
+  onLogin: (user: User) => void; 
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
@@ -16,7 +17,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
       const response = await fetch(`${import.meta.env.VITE_LOCAL_DEBUG_API_URL}/Users/login`, {
         method: 'POST',
@@ -25,32 +26,33 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           'X-API-KEY': `${import.meta.env.VITE_API_KEY}`,
         },
         body: JSON.stringify({
-          name: email, 
+          name: email,
           password: password,
         }),
       });
-
+  
       if (!response.ok) {
         const message = await response.json();
         throw new Error(message?.error || 'Login failed');
       }
-
-      const data: { token: string; user: User } = await response.json(); // Expecting the API to return the user data and JWT token
-
-      // Store JWT token in localStorage
-      localStorage.setItem('token', data.token);
-
-      // Call the onLogin function with the user data
-      onLogin(data.user);
-
-      // Optionally redirect the user after successful login
-      window.location.href = '/dashboard'; // Adjust this URL to the appropriate route in your application
+  
+      const data = await response.json();
+      console.log("API Response:", data);
+  
+      if (!data) {
+        throw new Error('User data is missing in the response');
+      }
+  
+      onLogin(data);
+  
+      window.location.href = '/dashboard';
     } catch (error: any) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="login-page">
@@ -81,11 +83,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           />
         </div>
         
-        <button type="submit" className="login-button" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
+        <Button variant='tertiary' fullWidth={true}>
+          {loading ? 'Loading...' : 'Sign In'}
+        </Button>
 
-        <p className='already-account'>Don't have an account? <a href="/register">Sign Up</a></p> {/* Adjust link as needed */}
+        <p className='already-account'>Don't have an account? <a href="/register">Sign Up</a></p>
       </form>
     </div>
   );
